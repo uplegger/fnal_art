@@ -87,7 +87,7 @@ class Larreco(CMakePackage):
     variant(
         "cxxstd",
         default="17",
-        values=("14", "17"),
+        values=("14", "17", "20"),
         multi=False,
         description="Use the specified C++ standard when building.",
     )
