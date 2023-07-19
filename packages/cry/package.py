@@ -34,7 +34,7 @@ class Cry(MakefilePackage):
     variant(
         "cxxstd",
         default="17",
-        values=("default", "98", "11", "14", "17"),
+        values=("default", "98", "11", "14", "17", "20"),
         multi=False,
         description="Use the specified C++ standard when building.",
     )
