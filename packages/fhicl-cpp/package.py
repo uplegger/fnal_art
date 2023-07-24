@@ -43,7 +43,7 @@ class FhiclCpp(CMakePackage):
     depends_on("cetlib-except")
     depends_on("cetmodules@3.19.02:", type="build")
     depends_on("cmake@3.21:", type="build")
-    depends_on("hep-concurrency")
+    depends_on("hep-concurrency", type="build")
     depends_on("openssl")
     depends_on("py-pybind11", type="build")
     depends_on("python")
