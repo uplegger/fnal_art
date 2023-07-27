@@ -202,7 +202,7 @@ class MuseExternals(BundlePackage):
         env.set("OPENBLAS_INC", self.spec["openblas"].prefix.include)
         env.set("POSTGRESQL_INC", self.spec["postgresql"].prefix.include)
         env.set("PYTHON_INCLUDE", self.spec["python"].prefix.include)
-        env.set("PYTHON_LIBDIR", self.spec["python"].prefix.libs.directories.join(" "))
+        env.set("PYTHON_LIBDIR", self.spec["python"].libs.directories.join(" "))
         env.set("ROOT_INC", self.spec["root"].prefix.include)
         env.set("SQLITE_INC", self.spec["sqlite"].prefix.include)
         #env.set("SWIG_VERSION", self.spec["swig"].version)
