@@ -154,7 +154,7 @@ class MuseExternals(BundlePackage):
             "cetlib",
             "clhep",
             "cryptopp",
-            "fhiclcpp",
+            "fhicl-cpp",
             "gsl",
             "hep-concurrency",
             "kinkal",
@@ -189,7 +189,7 @@ class MuseExternals(BundlePackage):
         env.set("CRY_LIB", self.spec["cry"].prefix.include)
         env.set("CRYPTOPP_INC", self.spec["cryptopp"].prefix.include)
         env.set("CRYPTOPP_LIB", self.spec["cryptopp"].prefix.include)
-        env.set("FHICLCPP_INC", self.spec["fhiclcpp"].prefix.include)
+        env.set("FHICLCPP_INC", self.spec["fhicl-cpp"].prefix.include)
         env.set("G4ENSDFSTATEDATA", self.spec["g4nuclide"].prefix.include)
         env.set("G4INCLDATA", self.spec["g4incl"].prefix.include)
         env.set("G4INCLUDE", self.spec["geant4"].prefix.include)
