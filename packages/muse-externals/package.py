@@ -202,7 +202,6 @@ class MuseExternals(BundlePackage):
         env.set("MESSAGEFACILITY_INC", self.spec["messagefacility"].prefix.include)
         env.set("MU2E_PCIE_UTILS_INC", self.spec["mu2e-pcie-utils"].prefix.include)
         env.set("OPENBLAS_INC", self.spec["openblas"].prefix.include)
-        env.set("PATH", self.spec["ups"].prefix.include)
         env.set("POSTGRESQL_INC", self.spec["postgresql"].prefix.include)
         env.set("PYTHON_INCLUDE", self.spec["python"].prefix.include)
         env.set("PYTHON_LIBDIR", self.spec["python"].lib)
