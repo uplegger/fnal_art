@@ -190,7 +190,6 @@ class MuseExternals(BundlePackage):
         env.set("CRYPTOPP_INC", self.spec["cryptopp"].prefix.include)
         env.set("CRYPTOPP_LIB", self.spec["cryptopp"].prefix.include)
         env.set("FHICLCPP_INC", self.spec["fhicl-cpp"].prefix.include)
-        env.set("G4ENSDFSTATEDATA", self.spec["g4nuclide"].prefix.include)
         env.set("G4INCLDATA", self.spec["g4incl"].prefix.include)
         env.set("G4INCLUDE", self.spec["geant4"].prefix.include)
         env.set("G4LIB", self.spec["geant4"].prefix.include)
