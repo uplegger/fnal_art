@@ -170,7 +170,6 @@ class MuseExternals(BundlePackage):
             "vecgeom",
             "xerces-c",
         ]
-        ldl = []
         for dep in deplist:
             env.append_path("LD_LIBRARY_PATH", self.spec[dep].prefix.lib)
 
@@ -194,7 +193,7 @@ class MuseExternals(BundlePackage):
         env.set("G4INCLUDE", self.spec["geant4"].prefix.include)
         env.set("G4LIB", self.spec["geant4"].prefix.include)
         # note: G4xxxDATA are set by the respective packages
-        env.set("GEANT4_VERSION", self.spec["geant4"].version.underscored)
+        env.set("GEANT4_VERSION", str(self.spec["geant4"].version))
         env.set("GSL_INC", self.spec["gsl"].prefix.include)
         env.set("HEP_CONCURRENCY_INC", self.spec["hep-concurrency"].prefix.include)
         env.set("KINKAL_INC", self.spec["kinkal"].prefix.include)
