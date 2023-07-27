@@ -172,7 +172,7 @@ class MuseExternals(BundlePackage):
         ]
         ldl = []
         for dep in deplist:
-            env.append("LD_LIBRARY_PATH", self.spec[dep].prefix.lib)
+            env.append_path("LD_LIBRARY_PATH", self.spec[dep].prefix.lib)
 
         env.set("ARTDAQ_CORE_INC", self.spec["artdaq_core"].prefix.include)
         env.set("ARTDAQ_CORE_MU2E_INC", self.spec["artdaq_core_mu2e"].prefix.include)
