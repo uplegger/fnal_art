@@ -179,7 +179,7 @@ class MuseExternals(BundlePackage):
         env.set("ART_INC", self.spec["art"].prefix.include)
         env.set("ART_ROOT_IO_INC", self.spec["art-root-io"].prefix.include)
         env.set("BOOST_INC", self.spec["boost"].prefix.include)
-        env.set("BTRK_INC", self.spec["BTrk"].prefix.include)
+        env.set("BTRK_INC", self.spec["btrk"].prefix.include)
         env.set("CANVAS_INC", self.spec["canvas"].prefix.include)
         env.set("CETLIB_EXCEPT_INC", self.spec["cetlib-except"].prefix.include)
         env.set("CETLIB_INC", self.spec["cetlib"].prefix.include)
