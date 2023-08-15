@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 import glob
+import os.path
 
 from spack import *
 
@@ -37,6 +38,7 @@ class Pandora(CMakePackage):
     depends_on("root")
     depends_on("eigen")
 
+
     def patch(self):
         # Build larpandoracontent as part of pandora
         filter_file(
@@ -57,6 +59,22 @@ class Pandora(CMakePackage):
             "cmakemodules/MacroPandoraGeneratePackageConfigFiles.cmake",
         )
 
+    # apply patch to 3.16.00 (to clear warnings in newer compilers)
+    # we have to apply our this patch *after* the initial
+    # cmake run because that and then a "make" downloads the sources we
+    # need to patch...`
+    @run_after("cmake") 
+    def patch_pandora(self):
+        patch = which("patch") 
+        make = which("make")
+        pdir = os.path.dirname(__file__)
+        with when("@03.16.00"):
+            with working_dir(self.build_directory):
+                make("LCContent","LArContent")
+            with working_dir(self.stage.source_path):
+                patch("-p0", "-t", "-i", 
+                       os.path.join(pdir,"pandora-v03-16-00.patch"))
+
     def cmake_args(self):
         args = [
             "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
@@ -65,11 +83,13 @@ class Pandora(CMakePackage):
             ),
             "-DCMAKE_MODULE_PATH={0}/etc/cmake".format(self.spec["root"].prefix),
             "-DPANDORA_MONITORING=ON",
-            "-DPANDORA_EXAMPLE_CONTENT=OFF",
-            "-DPANDORA_LC_CONTENT=OFF",
-            "-DPANDORA_LAR_CONTENT=OFF",
+            "-DLC_PANDORA_CONTENT=ON",
+            "-DLAR_PANDORA_CONTENT=ON",
+            "-DINSTALL_DOC=OFF",
+            "-DEXAMPLE_PANDORA_CONTENT=OFF",
         ]
         return args
+
 
     @run_after("install")
     def install_modules(self):

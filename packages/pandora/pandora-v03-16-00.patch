@@ -1,0 +1,106 @@
+diff -Naur LCContent-v03-01-05/include/LCUtility/KDTreeLinkerAlgoT.h LCContent-v03-01-05/include/LCUtility/KDTreeLinkerAlgoT.h
+--- LCContent-v03-01-05/include/LCUtility/KDTreeLinkerAlgoT.h	2020-07-14 09:24:31.000000000 -0500
++++ LCContent-v03-01-05/include/LCUtility/KDTreeLinkerAlgoT.h	2023-03-09 10:09:39.165144555 -0600
+@@ -272,7 +272,7 @@
+         for (unsigned i = 0; i < DIM; ++i)
+         {
+             const auto thedim = current->info.dims[i];
+-            isInside *= thedim >= trackBox.dimmin[i] && thedim <= trackBox.dimmax[i];
++            isInside = isInside && thedim >= trackBox.dimmin[i] && thedim <= trackBox.dimmax[i];
+         }
+ 
+         if (isInside)
+@@ -289,8 +289,8 @@
+         {
+             const auto regionmin = current->left->region.dimmin[i];
+             const auto regionmax = current->left->region.dimmax[i];
+-            isFullyContained *= (regionmin >= trackBox.dimmin[i] && regionmax <= trackBox.dimmax[i]);
+-            hasIntersection *= (regionmin < trackBox.dimmax[i] && regionmax > trackBox.dimmin[i]);
++            isFullyContained = isFullyContained && (regionmin >= trackBox.dimmin[i] && regionmax <= trackBox.dimmax[i]);
++            hasIntersection = hasIntersection && (regionmin < trackBox.dimmax[i] && regionmax > trackBox.dimmin[i]);
+         }
+ 
+         if (isFullyContained)
+@@ -310,8 +310,8 @@
+         {
+             const auto regionmin = current->right->region.dimmin[i];
+             const auto regionmax = current->right->region.dimmax[i];
+-            isFullyContained *= (regionmin >= trackBox.dimmin[i] && regionmax <= trackBox.dimmax[i]);
+-            hasIntersection *= (regionmin < trackBox.dimmax[i] && regionmax > trackBox.dimmin[i]);
++            isFullyContained = isFullyContained && (regionmin >= trackBox.dimmin[i] && regionmax <= trackBox.dimmax[i]);
++            hasIntersection = hasIntersection && (regionmin < trackBox.dimmax[i] && regionmax > trackBox.dimmin[i]);
+         }
+ 
+         if (isFullyContained)
+diff -Naur LCContent-v03-01-05/src/LCFragmentRemoval/BeamHaloMuonRemovalAlgorithm.cc LCContent-v03-01-05/src/LCFragmentRemoval/BeamHaloMuonRemovalAlgorithm.cc
+--- LCContent-v03-01-05/src/LCFragmentRemoval/BeamHaloMuonRemovalAlgorithm.cc	2020-07-14 09:24:31.000000000 -0500
++++ LCContent-v03-01-05/src/LCFragmentRemoval/BeamHaloMuonRemovalAlgorithm.cc	2023-03-09 10:08:03.621846969 -0600
+@@ -142,7 +142,8 @@
+     const bool isBeamHaloMuonInertia(this->IsBeamHaloMuonInertia(pCluster));
+     bool isBeamHaloMuon(isBeamHaloMuonInertia);
+ 
+-    float sumEnergy(0.f), sumEnergyX(0.f), sumEnergyY(0.f), sumEnergyZ(0.f);
++    // unused float sumEnergy(0.f), sumEnergyX(0.f), sumEnergyY(0.f), sumEnergyZ(0.f);
++    float sumEnergy(0.f), sumEnergyZ(0.f);
+     float xmin(std::numeric_limits<float>::max()), xmax(-std::numeric_limits<float>::max());
+     float ymin(std::numeric_limits<float>::max()), ymax(-std::numeric_limits<float>::max());
+     float zmin(std::numeric_limits<float>::max()), zmax(-std::numeric_limits<float>::max());
+@@ -161,8 +162,8 @@
+                 const CartesianVector &hitPosition(pCaloHit->GetPositionVector());
+ 
+                 sumEnergy  += energy;
+-                sumEnergyX += energy * hitPosition.GetX();
+-                sumEnergyY += energy * hitPosition.GetY();
++                // unused sumEnergyX += energy * hitPosition.GetX();
++                // unused sumEnergyY += energy * hitPosition.GetY();
+                 sumEnergyZ += energy * hitPosition.GetZ();
+ 
+                 if (hitPosition.GetX() > xmax)
+diff -Naur LCContent-v03-01-05/src/LCPlugins/LCSoftwareCompensation.cc LCContent-v03-01-05/src/LCPlugins/LCSoftwareCompensation.cc
+--- LCContent-v03-01-05/src/LCPlugins/LCSoftwareCompensation.cc	2020-07-14 09:24:31.000000000 -0500
++++ LCContent-v03-01-05/src/LCPlugins/LCSoftwareCompensation.cc	2023-03-09 10:08:03.622846961 -0600
+@@ -248,13 +248,8 @@
+     m_minCleanHitEnergyFraction(0.01f),
+     m_minCleanCorrectedHitEnergy(0.1f)
+ {
+-    const unsigned int nParameters(9);
+-    const float parameters[nParameters] = {2.49632f, -0.0697302f, 0.000946986f, -0.112311f, 0.0028182f, -9.62602e-05f, 0.168614f, 0.224318f, -0.0872853f};
+-    m_softCompParameters.insert(m_softCompParameters.begin(), parameters, parameters + nParameters);
+-
+-    const unsigned int nBins(10);
+-    const float bins[nBins] = {0.f, 2.f, 5.f, 7.5f, 9.5f, 13.f, 16.f, 20.f, 23.5f, 28.f};
+-    m_softCompEnergyDensityBins.insert(m_softCompEnergyDensityBins.begin(), bins, bins + nBins);
++    m_softCompParameters = {2.49632f, -0.0697302f, 0.000946986f, -0.112311f, 0.0028182f, -9.62602e-05f, 0.168614f, 0.224318f, -0.0872853f};
++    m_softCompEnergyDensityBins = {0.f, 2.f, 5.f, 7.5f, 9.5f, 13.f, 16.f, 20.f, 23.5f, 28.f};
+ }
+ 
+ } // namespace lc_content
+diff -Naur PandoraMonitoring-v03-05-00/include/TTreeWrapper.h PandoraMonitoring-v03-05-00/include/TTreeWrapper.h
+--- PandoraMonitoring-v03-05-00/include/TTreeWrapper.h	2020-06-26 03:59:42.000000000 -0500
++++ PandoraMonitoring-v03-05-00/include/TTreeWrapper.h	2023-03-09 10:08:03.623846954 -0600
+@@ -56,8 +56,6 @@
+ 
+         Branch(TTree *tree, const std::string &branchName);
+ 
+-        ~Branch();
+-
+         void Set(T variable);
+ 
+     private:
+diff -Naur PandoraMonitoring-v03-05-00/src/TTreeWrapper.cc PandoraMonitoring-v03-05-00/src/TTreeWrapper.cc
+--- PandoraMonitoring-v03-05-00/src/TTreeWrapper.cc	2020-06-26 03:59:42.000000000 -0500
++++ PandoraMonitoring-v03-05-00/src/TTreeWrapper.cc	2023-03-09 10:08:03.623846954 -0600
+@@ -266,13 +266,6 @@
+ //------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ template <typename T>
+-TTreeWrapper::Branch<T>::~Branch()
+-{
+-}
+-
+-//------------------------------------------------------------------------------------------------------------------------------------------
+-
+-template <typename T>
+ void TTreeWrapper::Branch<T>::Set(T variable)
+ {
+     m_variable = variable;
