@@ -9,6 +9,11 @@ import sys
 from spack import *
 
 
+def sanitize_environments(env, *vars):
+    for var in vars:
+        env.prune_duplicate_paths(var)
+        env.deprioritize_system_paths(var)
+
 class Otsdaq(CMakePackage):
     """The toolkit currently provides functionality for data transfer,
     event building, event reconstruction and analysis (using the art analysis
@@ -46,3 +51,21 @@ class Otsdaq(CMakePackage):
     depends_on("artdaq")
     depends_on("artdaq-database~builtin_fhicl")
     depends_on("artdaq-daqinterface")
+
+    def setup_run_environment(self, env):
+        prefix = self.prefix
+        # Ensure we can find plugin libraries.
+        env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
+        # Ensure we can find fhicl files
+        env.prepend_path("FHICL_FILE_PATH", prefix + "/fcl")
+        # Cleaup.
+        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH")
+
+    def setup_dependent_run_environment(self, env, dependent_spec):
+        prefix = self.prefix
+        # Ensure we can find plugin libraries.
+        env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
+        # Ensure we can find fhicl files
+        env.prepend_path("FHICL_FILE_PATH", prefix + "/fcl")
+        # Cleaup.
+        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH")
