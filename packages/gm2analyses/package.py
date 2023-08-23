@@ -22,8 +22,6 @@ class Gm2analyses(CMakePackage):
 
     version("9.60.00", sha256="1efd2e99333d99c8fcbaa6743e5e5b86aa0f6d93f7c2c7db823ff08980feedde")
 
-    variant("cxxstd", default="17")
-
     depends_on("pkgconfig", type="build")
     depends_on("cetpkgsupport", type=("build"))
     depends_on("cetbuildtools", type=("build"))
@@ -36,12 +34,18 @@ class Gm2analyses(CMakePackage):
     depends_on("gm2reconeast", type=("build", "run"))
     depends_on("gm2db", type=("build", "run"))
     depends_on("eigen", type=("build", "run"))
+    depends_on("cetmodules", type=("build"))
+
+    variant("cxxstd", default="17")
 
     def cmake_args(self):
-        # FIXME: Add arguments other than
-        # FIXME: CMAKE_INSTALL_PREFIX and CMAKE_BUILD_TYPE
-        # FIXME: If not needed delete this function
         args = [
             "-DCXX_STANDARD=%s" % self.spec.variants["cxxstd"].value,
+            "-DOLD_STYLE_CONFIG_VARS=True", 
+            "-DCMAKE_MODULE_PATH={0}".format(
+                          self.spec['cetmodules'].prefix.Modules.compat),
+            "-DUPS_PRODUCT_VERSION=v{0}".format(self.spec.version.underscored),
         ]
         return args
+
+

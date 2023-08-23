@@ -14,6 +14,8 @@ class Artg4(CMakePackage):
 
     maintainers = ["marcmengel"]
 
+    variant("cxxstd", default="17")
+
     version("9.70.00", sha256="f77c5afac341562451127ebe7657844049a1fb8c860850638fff32641ffce2e6")
 
     def patch(self):
@@ -38,16 +40,31 @@ class Artg4(CMakePackage):
     variant("cxxstd", default="17")
 
     depends_on("cetbuildtools", type=("build"))
+    depends_on("cetmodules", type=("build"))
+    depends_on("boost", type=("build","run"))
+    depends_on("intel-tbb-oneapi", type=("build","run"))
     depends_on("cetpkgsupport", type=("build", "run"))
     depends_on("art", type=("build", "run"))
+    depends_on("canvas", type=("build", "run"))
+    depends_on("canvas-root-io", type=("build", "run"))
     depends_on("geant4", type=("build", "run"))
     depends_on("xerces-c", type=("build", "run"))
     depends_on("fhicl-cpp", type=("build", "run"))
     depends_on("messagefacility", type=("build", "run"))
 
+
     def cmake_args(self):
-        # FIXME: Add arguments other than
-        # FIXME: CMAKE_INSTALL_PREFIX and CMAKE_BUILD_TYPE
-        # FIXME: If not needed delete this function
-        args = []
+        args = [
+            "-DCXX_STANDARD=%s" % self.spec.variants["cxxstd"].value,
+            "-DOLD_STYLE_CONFIG_VARS=True",
+            "-DCMAKE_MODULE_PATH={0}".format(
+                          self.spec['cetmodules'].prefix.Modules.compat),
+            "-DUPS_PRODUCT_VERSION=v{0}".format(self.spec.version.underscored),
+        ]
         return args
+
+    def setup_build_environment(self, env):
+        # set environment variables used in CMakeLists.txt
+        env.set("CETBUILDTOOLS_VERSION", self.spec['cetbuildtools'].version)
+        env.set("CANVAS_ROOT_IO_DIR", self.spec['canvas-root-io'].prefix)
+
