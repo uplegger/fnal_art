@@ -39,11 +39,14 @@ class Gm2reconeast(CMakePackage):
     depends_on("art-cpp-db-interfaces", type=("build", "run"))
     depends_on("libwda", type=("build", "run"))
 
+
     def cmake_args(self):
-        # FIXME: Add arguments other than
-        # FIXME: CMAKE_INSTALL_PREFIX and CMAKE_BUILD_TYPE
-        # FIXME: If not needed delete this function
         args = [
             "-DCXX_STANDARD=%s" % self.spec.variants["cxxstd"].value,
+            "-DOLD_STYLE_CONFIG_VARS=True", 
+            "-DCMAKE_MODULE_PATH={0}".format(
+                          self.spec['cetmodules'].prefix.Modules.compat),
+            "-DUPS_PRODUCT_VERSION=v{0}".format(self.spec.version.underscored),
         ]
         return args
+
