@@ -27,6 +27,7 @@ class Otsdaq(CMakePackage):
     git = "https://github.com/art-daq/otsdaq.git"
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v2_06_11", sha256="808478d4e326fbff1349d4e1ca3fefd866110554107dc935c4e6483bb7d866dd")
     version("v2_06_10", sha256="c876cb556451063513b8d4f49dd9d329769f62ad1c05357017729c0e07ccdf39")
     version("v2_06_09", sha256="921c9c603439950ca4d5c2bf756053ec260d839e3ca6214b023616a9d94ed9e8")
     version("v2_06_08", sha256="cf377646249f018e3a19890000a82d2513c7ebe853244b6b23bc82a5379c2500")
@@ -58,6 +59,8 @@ class Otsdaq(CMakePackage):
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Ensure we can find fhicl files
         env.prepend_path("FHICL_FILE_PATH", prefix + "/fcl")
+        # Ensure we can find libraries
+        env.set("OTSDAQ_LIB", prefix.lib)
         # Cleaup.
         sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH")
 
@@ -67,5 +70,7 @@ class Otsdaq(CMakePackage):
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Ensure we can find fhicl files
         env.prepend_path("FHICL_FILE_PATH", prefix + "/fcl")
+        # Ensure we can find libraries
+        env.set("OTSDAQ_LIB", prefix.lib)
         # Cleaup.
         sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH")

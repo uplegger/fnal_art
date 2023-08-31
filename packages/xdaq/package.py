@@ -33,6 +33,7 @@ class Xdaq(MakefilePackage):
     depends_on("numactl")
     depends_on("libtirpc")
     depends_on("libelf")
+    depends_on("uuid")
 
     patch("mfDefs.core.patch")
     patch("build.Makefile.rules.patch")
@@ -52,6 +53,15 @@ class Xdaq(MakefilePackage):
     depends_on("log4cplus")
     #depends_on("xalan-c")
     depends_on("jansson")
+
+    def patch(self):
+        tirpc_include_dir = self.spec["libtirpc"].prefix.include.tirpc
+        print("TIRPC Include path: " + tirpc_include_dir)
+        for dirpath, dirnames, filenames in os.walk("."):
+            for filename in filenames:
+                if "Makefile" in filename:
+                    filepath = os.path.join(dirpath, filename)
+                    filter_file("/usr/include/tirpc", tirpc_include_dir, filepath)
 
 
     def build(self, spec, prefix):
