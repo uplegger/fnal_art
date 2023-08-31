@@ -56,7 +56,7 @@ class Xdaq(MakefilePackage):
 
     def patch(self):
         tirpc_include_dir = self.spec["libtirpc"].prefix.include.tirpc
-        print("TIRPC Include path: " + tirpc_include_dir)
+        #print("TIRPC Include path: " + tirpc_include_dir)
         for dirpath, dirnames, filenames in os.walk("."):
             for filename in filenames:
                 if "Makefile" in filename:
