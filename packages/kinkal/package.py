@@ -26,8 +26,8 @@ class Kinkal(CMakePackage):
     version("2.0.1", sha256="d845e1232168dd22b8e1b2ddde6ff4da6f511c81aa8b56c2cf64b9dfa27c0203")
     version("2.0.0", sha256="90286168ebf222fdc227adcbb8fed0b60208f7431511afe128f85f1e76fc10b0")
 
-    depends_on("root")
+    depends_on("root+mlp")
 
     def cmake_args(self):
-        args = []
+        args = ["-DPROJECT_SOURCE_DIR=%s" % self.stage.source_path,]
         return args

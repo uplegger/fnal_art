@@ -28,3 +28,6 @@ class Btrk(SConsPackage):
     def build_args(self, spec, prefix):
         args = []
         return args
+
+    def setup_build_environment(self, env):
+        env.set("PYTHONPATH", "%s/python" % self.stage.source_dir)
