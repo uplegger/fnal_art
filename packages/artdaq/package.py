@@ -27,7 +27,9 @@ class Artdaq(CMakePackage):
     url = "https://github.com/art-daq/artdaq/archive/refs/tags/v3_12_04.tar.gz"
     git = "https://github.com/art-daq/artdaq.git"
 
+
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_12_05", sha256="871a2386d324059de13b94819ec11e731598a1ac124bb2e8c2b29ed7f9af9309")
     version("v3_12_04", sha256="0221d41878d3e99b7b40ff46e3d4a9542f07bb81bb21d4cfbb223e06f2a57502")
     version("v3_12_03", sha256="2300fd0c78d33b411cfd05b552242e1a816e457e6d13880c35e7167df77b114f")
     version("v3_12_02", sha256="98baad840c49be9b16d8dc819a708505fa8601fcb42844c17c1013f9d75b728e")

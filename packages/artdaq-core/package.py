@@ -26,12 +26,14 @@ class ArtdaqCore(CMakePackage):
     url = "https://github.com/art-daq/artdaq_core/archive/refs/tags/v3_09_04.tar.gz"
     git = "https://github.com/art-daq/artdaq_core.git"
     
+
+    version("v3_09_13", sha256="53b952cc973d6ba1bceeeafa874e8d56758f41f6362b0244999cbb9749906051")
     version("v3_09_12", sha256="267a9da649d7ea5e38a5e710f1c680b65eb701b0e8bbb9b4896bbf01309558b4")
     version("v3_09_09", sha256="c4a820a26f9fb3a5d3fc4a25e53f0dc4a2d15fb5594264c3e50bd0936f232c77")
-    version("develop", branch="develop", get_full_repo=True)
     version("v3_09_08", sha256="5689cdf8384276835be9dfd50489917d3729242833f9f2da115445d9245978b2")
     version("v3_09_07", sha256="3bf9285171c86e9f039e5d48a99b577544ab4a17d6f4a4f1a79d6bfb797eeede")
     version("v3_09_04", sha256="8d4315e0ebe7b663d171352d8e08dd87393d34319f672837eb8c93ea83b8ba63")
+    version("develop", branch="develop", get_full_repo=True)
 
     variant(
         "cxxstd",
