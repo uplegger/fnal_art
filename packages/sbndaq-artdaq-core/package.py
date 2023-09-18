@@ -22,6 +22,10 @@ class SbndaqArtdaqCore(CMakePackage):
         commit="e80441a707b42befe641002440421b4d2ea572d4",
         get_full_repo=True,
     )
+    version("1.08.00of0", sha256="4b839b28a9ac17b89a3c33f840fb7cd3ae96f13c12ab461794a7dd04b144b024")
+    version("1.08.00", sha256="02c5008d8b411f3edd8a67be9ae4f51fba840533693c624981a649679c0e43dd")
+    version("1.07.01", sha256="edf3b55215c7b9f034188eeebad33654d938f60073cc568e4ba8f5f23c0515a7")
+    version("1.07.00of0", sha256="e57e4ffe9a0824af9a0d3ce5f692bb9c7a0d1fbc40256991b2f47c888919be72")
     version("v1_00_00of0", git=git_base, tag="v1_00_00of0", get_full_repo=True)
     version("v1_00_00of2", git=git_base, tag="v1_00_00of2", get_full_repo=True)
 
