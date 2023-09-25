@@ -16,12 +16,11 @@ class SbndaqArtdaqCore(CMakePackage):
     git_base = "https://github.com/SBNSoftware/sbndaq-artdaq-core.git"
     list_url = "https://api.github.com/repos/SBNSoftware/sbndaq-artdaq-core/tags"
 
-    version(
-        "develop",
-        git=git_base,
-        commit="e80441a707b42befe641002440421b4d2ea572d4",
-        get_full_repo=True,
-    )
+    version("develop", git=git_base, branch="develop", get_full_repo=True)
+    version("1.08.00of0", sha256="4b839b28a9ac17b89a3c33f840fb7cd3ae96f13c12ab461794a7dd04b144b024")
+    version("1.08.00", sha256="02c5008d8b411f3edd8a67be9ae4f51fba840533693c624981a649679c0e43dd")
+    version("1.07.01", sha256="edf3b55215c7b9f034188eeebad33654d938f60073cc568e4ba8f5f23c0515a7")
+    version("1.07.00of0", sha256="e57e4ffe9a0824af9a0d3ce5f692bb9c7a0d1fbc40256991b2f47c888919be72")
     version("v1_00_00of0", git=git_base, tag="v1_00_00of0", get_full_repo=True)
     version("v1_00_00of2", git=git_base, tag="v1_00_00of2", get_full_repo=True)
 
@@ -32,6 +31,9 @@ class SbndaqArtdaqCore(CMakePackage):
         multi=False,
         description="Use the specified C++ standard when building.",
     )
+    
+    variant("icarus", default=False, description="Build ICARUS-specific parts of the package")
+    variant("sbnd", default=False, description="Build SBND-specific parts of the package")
 
     def url_for_version(self, version):
         url = "https://github.com/SBNSoftware/{0}/archive/v{1}.tar.gz"
@@ -53,7 +55,7 @@ class SbndaqArtdaqCore(CMakePackage):
             )
         )
 
-    patch("cetmodules2.patch", when="@develop")
+    #patch("cetmodules2.patch", when="@develop")
     patch("v1_00_00of0.patch", when="@v1_00_00of0")
     patch("v1_00_00of2.patch", when="@v1_00_00of2")
 
@@ -71,11 +73,7 @@ class SbndaqArtdaqCore(CMakePackage):
     def cmake_args(self):
         args = [
             "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-            "-DCANVAS_VERSION=v3_06_00",
-            "-DMESSAGEFACILITY_VERSION=v2_02_05",
-            "-DBoost_SYSTEM_LIBRARY=-lboost_system-mt",
-            "-DBoost_DATE_TIME_LIBRARY=-lboost_date_time",
-            "-DBoost_FILESYSTEM_LIBRARY=-lboost_filesystem",
-            "-DBoost_THREAD_LIBRARY=-lboost_thread",
+            "-DICARUS_BUILD={0}".format("TRUE" if "+icarus" in self.spec else "FALSE"),
+            "-DSBND_BUILD={0}".format("TRUE" if "+sbnd" in self.spec else "FALSE"),
         ]
         return args
