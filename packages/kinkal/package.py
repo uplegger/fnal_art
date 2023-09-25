@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.package import *
-
+import os
 
 class Kinkal(CMakePackage):
     """Kinematic Kalman filter track fit code package"""
@@ -28,6 +28,27 @@ class Kinkal(CMakePackage):
 
     depends_on("root+mlp")
 
+    variant(
+        "cxxstd",
+        default="17",
+        values=("17", "20", "23"),
+        multi=False,
+        sticky=True,
+        description="C++ standard",
+    )
+
+    def patch(self):
+        filter_file(
+            r"(set\(CMAKE_CXX_STANDARD )17\)",
+            r"\1 %s)" % self.spec.variants["cxxstd"].value,
+            "CMakeLists.txt",
+        )
+
     def cmake_args(self):
-        args = ["-DPROJECT_SOURCE_DIR=%s" % self.stage.source_path,]
+        args = ["-DPROJECT_SOURCE_DIR=%s" % self.stage.source_path, self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),]
         return args
+
+    @run_before('build')
+    def makelink(self):
+        with working_dir(self.stage.path):
+            os.symlink('%s/spack-src' % self.stage.path, '%s/KinKal' % self.stage.path)
