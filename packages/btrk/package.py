@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.package import *
-import glob,os
+import os
 
 
 class Btrk(SConsPackage):
@@ -48,7 +48,7 @@ class Btrk(SConsPackage):
 
     def install(self, spec, prefix):
         rename('%s/lib' % self.stage.source_path, prefix.lib)
-        install_tree(self.stage.source_path, prefix.source, ignore=glob.glob('**/SConscript'))
+        install_tree(self.stage.source_path, prefix.source)
         mkdirp(prefix.include)
         headerlist = find_all_headers(self.stage.source_path)
         for d in headerlist.directories:
