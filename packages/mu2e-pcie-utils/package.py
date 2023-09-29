@@ -22,6 +22,7 @@ class Mu2ePcieUtils(CMakePackage):
     git = "https://github.com/Mu2e/mu2e_pcie_utils.git"
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v2_08_05", commit="adf1cbc")
     version("v2_08_00", commit="32899a1")
 
     def url_for_version(self, version):
