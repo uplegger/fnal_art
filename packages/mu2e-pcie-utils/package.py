@@ -40,7 +40,4 @@ class Mu2ePcieUtils(CMakePackage):
 
     depends_on("cetmodules", type="build")
     depends_on("messagefacility")
-
-    depends_on("trace+kmod")
-
-    
+    depends_on("trace")
