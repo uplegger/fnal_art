@@ -1,0 +1,53 @@
+diff --git a/mcs/basic_driver/CMakeLists.txt b/mcs/basic_driver/CMakeLists.txt
+index db92496..7585bdc 100644
+--- a/mcs/basic_driver/CMakeLists.txt
++++ b/mcs/basic_driver/CMakeLists.txt
+@@ -1,10 +1,10 @@
++if (EXISTS /lib/modules/${KVERS}/build)
+ if (DEFINED ENV{KDIR})
+   set(KDIR "$ENV{KDIR}")
+   execute_process(COMMAND cat ${KDIR}/include/config/kernel.release OUTPUT_VARIABLE KVERS OUTPUT_STRIP_TRAILING_WHITESPACE)
+ else()
+   execute_process(COMMAND uname -r OUTPUT_VARIABLE KVERS OUTPUT_STRIP_TRAILING_WHITESPACE)
+ endif()
+-
+ if(EXISTS "${TRACE_BIN_DIR}/../module/${KVERS}/TRACE.ko")
+   # Using a UPS product version of TRACE
+   set(TRACE_KO "${TRACE_BIN_DIR}/../module/${KVERS}/TRACE.ko")
+@@ -33,6 +33,10 @@ add_custom_command(
+ 
+ add_custom_target(pci_devel_module ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/../../drivers/${KVERS}/pci_devel_main.ko)
+ install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../../drivers DESTINATION .)
+-
++else()
++    if(${WANT_KMOD})
++        message(FATAL_ERROR "KMOD build requested, but kernel-devel package is not installed!")
++    endif()
+ install_headers()
+ install_source()
++endif()
+diff --git a/mu2e_driver/CMakeLists.txt b/mu2e_driver/CMakeLists.txt
+index 3c54004..99f1f7e 100644
+--- a/mu2e_driver/CMakeLists.txt
++++ b/mu2e_driver/CMakeLists.txt
+@@ -5,6 +5,7 @@ else()
+   execute_process(COMMAND uname -r OUTPUT_VARIABLE KVERS OUTPUT_STRIP_TRAILING_WHITESPACE)
+ endif()
+ 
++if (EXISTS /lib/modules/${KVERS}/build)
+ #get_cmake_property(_variableNames VARIABLES)
+ #foreach(_variableName ${_variableNames})
+ #      message(STATUS "${_variableName}=${${_variableName}}")
+@@ -58,6 +59,11 @@ add_custom_command(
+ 
+ add_custom_target(mu2e_driver ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/../drivers/${KVERS}/mu2e.ko)
+ install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../drivers DESTINATION .)
++else()
++    if(${WANT_KMOD})
++        message(FATAL_ERROR "KMOD build requested, but kernel-devel package is not installed!")
++    endif()
++endif()
+ 
+ install_headers()
+ install_source()
+
