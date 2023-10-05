@@ -31,6 +31,8 @@ class Larsoft(CMakePackage):
     url = "https://github.com/LArSoft/larsoft/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larsoft/tags"
 
+    version("09.78.06", sha256="3733332dcf15189688476558fc617873634e75d110fc816eb82305818a5f6f7b") 
+    version("09.78.00", sha256="c02d744cf66b2494316392a105c2ab8a2224ce5e33ae8e4f695054db77f13a12")
     version(
         "09.37.01.01", sha256="f9563d95c4cae3dca17c15ead61ac0e012d974b957f852d5832b15062e0d20d8"
     )

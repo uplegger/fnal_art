@@ -31,6 +31,8 @@ class Larsoftobj(CMakePackage):
     url = "https://github.com/LArSoft/larsoftobj/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larsoftobj/tags"
 
+    version("09.32.01", sha256="665d91113e12a36b7cb289337ed66d371c1d48f880fc1b68b7f64d42b37468c3") # FIX ME
+    version("09.31.01", sha256="68b6a1e9204e72f508cf54f8f02515c283b5a67d1b5d0bba2a49c000f7f679e3")
     version(
         "09.30.00.rc1", sha256="5acb66660d6650fefb4c936885c1ea96cdd55bff80ef0207bf28b92a9660553f"
     )

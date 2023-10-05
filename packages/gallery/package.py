@@ -23,9 +23,11 @@ class Gallery(CMakePackage):
     git = "https://github.com/art-framework-suite/gallery.git"
     url = "https://github.com/art-framework-suite/gallery/archive/refs/tags/v1_21_01.tar.gz"
 
+
     version("develop", branch="develop", get_full_repo=True)
     version("1.21.01", sha256="e932c2469de4abb87527defe7357ea6423e8dbc18ef9d9b5148e5e658c3ffc91")
     version("1.21.02", sha256="0eb3eff1a173d09b698e1ba174ab61d9af72937067b300f1b73d0eca73349294")
+    version("1.20.02", sha256="433e2b5727b9d9cf47206d9a01db5eab27c5cbb76407bb0ec14c0fd4e4dc41f9")
 
 
     variant(

@@ -12,6 +12,8 @@ class Jsonnet(Package):
     homepage = "https://jsonnet.org"
     url = "https://github.com/google/jsonnet/archive/v0.9.3.tar.gz"
 
+
+    version("0.18.0", sha256="85c240c4740f0c788c4d49f9c9c0942f5a2d1c2ae58b2c71068107bc80a3ced4")
     version("0.12.1", sha256="257c6de988f746cc90486d9d0fbd49826832b7a2f0dbdb60a515cc8a2596c950")
     version("0.12.0", sha256="9285f44f73a61fbfb61b3447a622e8aff0c61580c61c4a92f69d463ea7f1624a")
     version("0.11.2", sha256="c7c33f159a9391e90ab646b3b5fd671dab356d8563dc447ee824ecd77f4609f8")

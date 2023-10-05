@@ -30,6 +30,8 @@ class Larpandoracontent(CMakePackage):
     url = "https://github.com/LArSoft/larpandoracontent/archive/refs/tags/v03_26_01.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larpandoracontent/tags"
 
+    version("04.05.01", sha256="97b1d27fb9652cfa36e14bcdc5385914ba1c79c747b182b64c7f0f3861336136") # FIX ME
+    version("04.05.00", sha256="6556e1ebbd1d1a68b876ac0e732c38b90cdc8896ea5f6d2c5bddafec6506b439")
     version(
         "03.26.01.01", sha256="f7c38678f3b7631df1287ca63ee3479d62c33b6d82134e9b98b7e6de90c4ce5c"
     )

@@ -24,6 +24,7 @@ class Dk2nugenie(CMakePackage):
     homepage = "https://cdcvs.fnal.gov/redmine/projects/dk2nu"
     url = "https://cdcvs.fnal.gov/subversion/dk2nu/tags/v01_07_02"
 
+    version("01.10.01", revision="155", svn="https://cdcvs.fnal.gov/subversion/dk2nu/trunk")
     version("01.10.00", revision="154", svn="https://cdcvs.fnal.gov/subversion/dk2nu/trunk")
     version("01.09.02", revision="153", svn="https://cdcvs.fnal.gov/subversion/dk2nu/trunk")
     version("01.09.01", revision="152", svn="https://cdcvs.fnal.gov/subversion/dk2nu/trunk")
@@ -65,7 +66,7 @@ class Dk2nugenie(CMakePackage):
         args = [
             "-DCMAKE_INSTALL_PREFIX=%s" % prefix,
             "-DGENIE_ONLY=ON",
-            "-DTBB_LIBRARY=%s/libtbb.so" % self.spec["tbb"].prefix.lib,
+            "-DTBB_LIBRARY=%s/libtbb.so" % self.spec["tbb"].prefix.lib64,
             "-DGENIE_INC=%s/GENIE" % self.spec["genie"].prefix.include,
             "-DGENIE=%s" % self.spec["genie"].prefix,
             "-DGENIE_VERSION=%s" % self.spec["genie"].version,
