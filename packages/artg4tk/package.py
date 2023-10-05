@@ -24,6 +24,7 @@ class Artg4tk(CMakePackage):
     version("develop", branch="develop", git=git_base, get_full_repo=True)
     version("mwm1", branch="mwm1", git=git_base, get_full_repo=True)
     version("MVP1a", branch="feature/Spack-MVP1a", git=git_base, get_full_repo=True)
+    version("11.00.01", tag="v11_00_01", git=git_base, get_full_repo=True)
     version("10.02.01", tag="v10_02_01", git=git_base, get_full_repo=True)
     version("10.02.01.01", tag="v10_02_01_01", git=git_base, get_full_repo=True)
     version("09.04.04", tag="v09_04_04", git=git_base, get_full_repo=True)

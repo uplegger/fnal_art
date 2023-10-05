@@ -33,6 +33,11 @@ class Nuevdb(CMakePackage):
     url = "https://github.com/NuSoftHEP/nuevdb/archive/refs/tags/v1_05_05.tar.gz"
     list_url = "https://api.github.com/repos/NuSoftHEP/nuevdb/tags"
 
+    version("1.08.01", sha256="5bbf54e6c772e8f73e8ad2f7629f47e8b15731dd7af80c51b2060976c8c7a013")
+    version("1.08.00", sha256="3357833402e4717aee8f562a6ea59eb47f1be6372215a049e354f9eeaa903ac9")
+    version("1.07.03", sha256="264e74ada3a6f7561f9278d18a9b02bd1e397c1bbafb1c0ee1e363a091136389")
+    version("1.07.02", sha256="8d429ca966d481f7ad46b18c5fdb77b67cfb949ac709f5cb9a733995835387d9")
+    version("1.07.01", sha256="32d32c340a055242ed214098296c6bea0b87beb7ba0356fcc52fc72673000cef")
     version("1.06.00", sha256="5a9dc5dd235ed4a16f26ebf09070d806f132bb22c6750a019c6ca7a3797d5d51")
     version("1.05.06", sha256="76050a5dea93202b39ce81e09a4b66411ad845340bef935fe50d6d54e1a90126")
     version("1.05.05", sha256="e5bbd1c523f8befcb63b4a6a529e6eed592519ddefd31a2504ffd25e312e1115")

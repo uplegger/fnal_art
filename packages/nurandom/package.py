@@ -33,6 +33,7 @@ class Nurandom(CMakePackage):
     url = "https://github.com/NuSoftHEP/nurandom/archive/refs/tags/v1_07_06.tar.gz"
     list_url = "https://api.github.com/repos/NuSoftHEP/nurandom/tags"
 
+    version("1.10.01", sha256="6f491b2b71f009f6e42caa259672763c4344cdfc0dffedaaa48cee7e58298ec7")
     version("1.08.00", sha256="f7ffa502bf2088ac1a9b974e6c57b8cc6d0ba07730174ea0f45b89810bc04411")
     version("1.07.06", sha256="85a6b595bd1b6b2873ebc726e0d4031570dc12897632cdb7d2a8fb5c16954cb5")
     version("mwm1", tag="mwm1", git=git_base, get_full_repo=True)

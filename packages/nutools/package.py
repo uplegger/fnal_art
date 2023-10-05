@@ -33,6 +33,7 @@ class Nutools(CMakePackage):
     url = "https://github.com/NuSoftHEP/nutools/archive/refs/tags/v3_11_05.tar.gz"
     list_url = "https://api.github.com/repos/NuSoftHEP/nutools/tags"
 
+    version("3.15.03", sha256="ae9a23e20ae2823dd7abc4972f55038bafea26dfaefa695d4e9fab2f286ec1a0")
     version("3.12.00", sha256="6c2e70f6550c0e26c8457ec9876dd18d3f943ad00f1a1db65a3d0ab7f7449aa6")
     version("3.11.06", sha256="994f30da77259b83c549a44b9a90ccae90a28010b164f0e53aee5ca476ebf95e")
     version("3.11.05", sha256="c58c254de91c94739a23c6de454640fe096561358205ea8ed86afc28171e3e5e")

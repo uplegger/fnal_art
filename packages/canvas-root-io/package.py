@@ -25,6 +25,7 @@ class CanvasRootIo(CMakePackage):
     version("1.12.03", sha256="53919330ebc85fb19fb4ab42a4be588cf12e866118339ccd408af0722eebdb5b")
     version("1.12.02", sha256="ad0fdb8d03e2646ca1522cabd1bcf766884a2c5720a3c0d338e7d29995e10316")
     version("1.12.01", sha256="244dde7f035ef142c42f8bdb8cd80bda2e39ef4e1bd0f45d16614d495221358a")
+    version("1.11.02", sha256="c647f74c39d960a56c9599470652c5dea5bcfa3a75a570a7b6ca4aa4093a05d7")
     version("1.11.00", sha256="950ccf0277f7315d396ae49f6421fd613a7bb34cf7cba68c1c2dfb062b990b6c")
     version("1.09.04", sha256="cb854b4fdc72be24856886d985f96ceb3b0049729df0b4a11fb501ff7c48847b")
 

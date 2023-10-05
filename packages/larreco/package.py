@@ -33,6 +33,8 @@ class Larreco(CMakePackage):
     url = "https://github.com/LArSoft/larreco/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larreco/tags"
 
+    version("09.22.03", sha256="6e7c0e11bd70fb47f4f0f39e211a60dcf3c4d888415eb2cf7a48070b43aa1a7b") # FIX ME
+    version("09.22.00", sha256="b7389f283b1ba23571022af44f3d62006d5b5e0c0f3d3b9f653e2d983c1d8541")
     version(
         "09.07.08.02", sha256="eba7aba2443f4c9efdb0f071db9ca6ffb7f6e0630283f235759c51586e33c449"
     )

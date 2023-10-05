@@ -1,52 +1,35 @@
-# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2023 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-import glob
-import os
 
 from spack.package import *
 
-try:
-    from spack.build_systems.cmake import CMakeBuilder as builder
-except ImportError:
-    from spack.build_systems.cmake import CMakePackage as builder
-
-
-# decorator to try a method twice...
-def tryagain(f):
-    def double_f(*args, **kwargs):
-        try:
-            f(*args, **kwargs)
-        except Exception:
-            f(*args, **kwargs)
-
-    return double_f
-
 
 class Triton(CMakePackage):
-    """C++ client code for Triton Inference Server."""
+    """Triton Client Libraries and Examples"""
 
-    homepage = "https://github.com/triton-inference-server/server"
-    url = "https://github.com/triton-inference-server/server/archive/v2.6.0.tar.gz"
+    homepage = "https://github.com/triton-inference-server/client"
+    url = "https://github.com/triton-inference-server/client/archive/refs/heads/r23.09.zip"
 
-    maintainers = ["marcmengel", "github_user2"]
+    maintainers("marcmengel")
 
-    version("2.3.0", sha256="3e46d09f0d3dd79513e10112170a81ed072db0719b75b95943d824b1afd149c4")
-    version("2.6.0", sha256="c4fad25c212a0b5522c7d65c78b2f25ab0916ccf584ec0295643fec863cb403e")
-    version("2.7.0", sha256="7ad24acb3c7138ff5667137e143de3f7345f03df61f060004214495faa7fa16e")
+    version( "23.09", sha256="33ece9b6a0ee3c6b198afde5e955ec53bb5c2c30eafbb80f9bd940619f14307b")
 
     variant("cuda", default=False)
-    variant(
-        "cxxstd",
-        default="17",
-        values=("14", "17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
 
-    depends_on("cmake@3.18:", type="build")
+    depends_on("curl")
+    depends_on("abseil-cpp")
+    depends_on("protobuf", type=("build", "run"))
+    depends_on("cuda", type=("build", "run"), when="+cuda")
+    depends_on("googletest", type=("build", "run"))
+    depends_on("rapidjson", type=("build", "run"))
+    depends_on("grpc", type=("build", "run"))
+    depends_on("re2", type=("build", "run"))
+    depends_on("c-ares", type=("build", "run"))
+    depends_on("openssl", type=("build", "run"))
+
     depends_on("py-setuptools", type="build")
     depends_on("py-wheel", type="build")
     depends_on("py-grpcio", type=("build", "run"))
@@ -54,60 +37,55 @@ class Triton(CMakePackage):
     depends_on("py-numpy")
     depends_on("py-geventhttpclient")
     depends_on("py-python-rapidjson")
-    depends_on("rapidjson")
-    depends_on("protobuf")
-    depends_on("googletest")
-    depends_on("google-cloud-cpp")
-    depends_on("crc32c")
-    depends_on("c-ares")
-    depends_on("libb64")
-    depends_on("libevent")
-    depends_on("libevhtp")
-    depends_on("c-ares")
-    depends_on("abseil-cpp")
-    depends_on("grpc")
-    depends_on("prometheus-cpp")
-    depends_on("curl@7.56:")
-    depends_on("opencv ~videoio~gtk~java~vtk~jpeg", when="~cuda")
-    depends_on("opencv ~videoio~gtk~java~vtk~jpeg+cuda+cudalegacy+cudaobjdetect", when="+cuda")
-    depends_on("cuda", when="+cuda")
-    depends_on("nccl", when="+cuda")
 
-    patch("cms.patch", when="@2.3.0")
-    patch("proto.patch", when="@2.3.0")
+    def patch(self):
+        # clean out all the third-party stuff...
+        filter_file( r'^ *-D[^C].*:PATH.*', '', 'CMakeLists.txt')
+        filter_file( r'^ *-DC[^M].*:PATH.*', '', 'CMakeLists.txt')
+        filter_file( r'FetchContent_MakeAvailable\(repo-third-party\)', '', 'CMakeLists.txt')
 
-    # trying doubled build...
-    build = tryagain(builder.build)
+        filter_file( r'DEPENDS \${_.._client_depends}', '', 'CMakeLists.txt')
+        filter_file( r'FetchContent_MakeAvailable\(googletest\)', 'find_package(googletest)', 'src/c++/CMakeLists.txt')
 
-    @run_before("cmake")
-    def patch_version(self):
-        filter_file(
-            r"^project.*",
-            "PROJECT({0} VERSION {1} LANGUAGES CXX C)".format("client", self.version),
-            "build/client/CMakeLists.txt",
-        )
-        filter_file(
-            r'data_files \+= \[\("bin", \["perf_analyzer", "perf_client"\]\)\]',
-            "data_files = data_files",
-            "src/clients/python/library/setup.py",
-        )
-        filter_file(
-            r".*\.\./\.\./\.\./(protobuf|grpc)/.*", "", "src/clients/c++/library/CMakeLists.txt"
-        )
+        
+    @run_after('cmake')
+    def postpatch(self):
+        # this package writes a cmake_isntall.cmake that tries to put
+        # external third-party bits (which we aren't building) in the
+        # destination, so run an initial make that will fail, and then
+        # clean them out
+        with working_dir(self.build_directory):
+            try:
+                make("all")
+            except:
+                pass
+            filter_file(
+                r'".*library/\.\./\.\./third-party.*"',
+                '',
+                'cc-clients/library/cmake_install.cmake'
+            )
+
+    def url_for_version(self, version):
+        urlf = "https://github.com/triton-inference-server/client/archive/refs/heads/r{0}.zip"
+        return urlf.format(version)
+
+    # root_cmakelists_dir = "src/c++"
 
     def cmake_args(self):
         args = [
-            "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
-            "-DCMAKE_C_COMPILER=cc",
-            "-DCMAKE_CXX_COMPILER=c++",
-            "-DTRITON_CURL_WITHOUT_CONFIG:BOOL=ON",
-            "-DTRITON_CLIENT_SKIP_EXAMPLES:BOOL=ON",
-            "-DTRITON_ENABLE_HTTP:BOOL=OFF",
-            "-DTRITON_ENABLE_GRPC:BOOL=ON",
-            "-DTRITON_VERSION={0}".format(self.spec.version),
-            "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-            "-DTRITON_COMMON_REPO_TAG:STRING=main",
-            "-DTRITON_CORE_REPO_TAG:STRING=main",
+            "-DTRITON_COMMON_REPO_TAG=r{0}".format(self.spec.version),
+            "-DTRITON_THIRD_PARTY_REPO_TAG=r{0}".format(self.spec.version),
+            "-DTRITON_CORE_REPO_TAG=r{0}".format(self.spec.version),
+            "-DTRITON_ENABLE_CC_HTTP=ON",
+            "-DTRITON_ENABLE_CC_GRPC=ON",
+            "-DTRITON_ENABLE_JAVA_HTTP=OFF",
+            "-DTRITON_ENABLE_PYTHON_HTTP=ON",
+            "-DTRITON_ENABLE_PYTHON_GRPC=ON",
+            "-DThreads_FOUND=ON",
+            "-DCMAKE_THREAD_LIBS_INIT=-lpthread",
+            "-DCMAKE_USE_PTHREADS_INIT=ON",
+            "-DTRITON_USE_THIRD_PARTY=OFF",
+            "-DCMAKE_INSTALL_LOCAL_ONLY=ON",
         ]
 
         if "+cuda" in self.spec:
@@ -119,48 +97,11 @@ class Triton(CMakePackage):
 
         return args
 
-    #
-    # we want our cmake/modules directory in the CMAKE_PREFIX_PATH
-    # but its built in _std_args(), and we want all that plus ours...
-    #
-    @property
-    def std_cmake_args(self):
-        std_cmake_args = CMakePackage._std_args(self)
-        fixed = []
-        for arg in std_cmake_args:
-            if arg.startswith("-DCMAKE_PREFIX_PATH:STRING="):
-                fixed.append(arg + ";" + self.stage.source_path + "/cmake/modules")
-            else:
-                fixed.append(arg)
-        return fixed
-
-    #
-    # also push our cmake/modules on the environment CMAKE_PREFIX_PATH for
-    # ExternalPackage calls...
-    #
-    def setup_build_environment(self, env):
-        env.prepend_path("CMAKE_PREFIX_PATH", self.stage.source_path + "/cmake/modules")
-        pass
-
-    root_cmakelists_dir = "build/client"
-
     def flag_handler(self, name, flags):
-        if name == "cxxflags" and self.spec.compiler.name == "gcc":
-            flags.append("-Wno-error=deprecated-declarations")
-            flags.append("-Wno-error=class-memaccess")
+        if name == "cxxflags":
+            flags.append("-I{0}".format(self.spec['rapidjson'].prefix.include))
+        elif name == "ldflags":
+            flags.append("-L{0}".format(self.spec['rapidjson'].prefix.lib64))
+            flags.append("-L/lib64")
         return (flags, None, None)
 
-    #    @tryagain
-    #    def build(self, spec, prefix):
-    #        with working_dir(self.build_directory):
-    #            make('cshm','all')
-
-    def install(self, spec, prefix):
-        with working_dir(self.build_directory):
-            make("install")
-
-    @run_before("install")
-    def install_model_headers(self):
-        mkdirp(self.prefix.include)
-        for f in glob.glob(join_path(self.build_directory, "src/core/*.pb.h")):
-            copy(f, join_path(self.prefix.include, os.path.basename(f)))
