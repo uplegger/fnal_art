@@ -98,7 +98,7 @@ class Lardataobj(CMakePackage):
     def cmake_args(self):
         args = [
            "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-           "-Dlardataobj_FW_DIR={0}".format(str(self.spec.prefix.fw)),
+           "-Dlardataobj_FW_DIR=fw"
         ]
        
         return args

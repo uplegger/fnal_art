@@ -87,6 +87,7 @@ class Nugen(CMakePackage):
     depends_on("cmake@3.12:", type="build")
     depends_on("cetmodules", type="build")
     depends_on("catch2@2.3.0:", type="build")
+    depends_on("nufinder",type="build")
 
     # Build and link dependencies.
     depends_on("clhep")
@@ -128,7 +129,7 @@ class Nugen(CMakePackage):
         # Set CMake args.
         args = [
             "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-            "IGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
+            "-DIGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
             "-DGENIE_INC={0}".format(self.spec["genie"].prefix.include),
         ]
         return args
