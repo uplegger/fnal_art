@@ -5,6 +5,7 @@
 
 
 from spack.package import *
+import os
 
 
 class Triton(CMakePackage):
@@ -19,8 +20,10 @@ class Triton(CMakePackage):
 
     variant("cuda", default=False)
 
-    depends_on("curl")
-    depends_on("abseil-cpp")
+    depends_on("patchelf", type=("build"))
+
+    depends_on("curl", type=("build","run"))
+    depends_on("abseil-cpp", type=("build","run"))
     depends_on("protobuf", type=("build", "run"))
     depends_on("cuda", type=("build", "run"), when="+cuda")
     depends_on("googletest", type=("build", "run"))
@@ -34,9 +37,9 @@ class Triton(CMakePackage):
     depends_on("py-wheel", type="build")
     depends_on("py-grpcio", type=("build", "run"))
     depends_on("py-grpcio-tools", type=("build", "run"))
-    depends_on("py-numpy")
-    depends_on("py-geventhttpclient")
-    depends_on("py-python-rapidjson")
+    depends_on("py-numpy", type=("build","run"))
+    depends_on("py-geventhttpclient", type=("build","run"))
+    depends_on("py-python-rapidjson", type=("build","run"))
 
     def patch(self):
         # clean out all the third-party stuff...
@@ -47,16 +50,23 @@ class Triton(CMakePackage):
         filter_file( r'DEPENDS \${_.._client_depends}', '', 'CMakeLists.txt')
         filter_file( r'FetchContent_MakeAvailable\(googletest\)', 'find_package(googletest)', 'src/c++/CMakeLists.txt')
 
+    @run_after("install")
+    def rpath_fixup(self):
+        # for some reason one of the libraries isn't being rpathed right
+        rp = [ self.spec["abseil-cpp"].prefix.lib64, self.spec["re2"].prefix.lib64]
+        print("rpath is ", rp)
+        patchelf = which("patchelf")
+        with working_dir(self.prefix.lib64):
+            patchelf("--add-rpath", ":".join(rp), "libgrpcclient.so")
         
-    @run_after('cmake')
-    def postpatch(self):
+    def build(self, pkg, spec):
         # this package writes a cmake_isntall.cmake that tries to put
         # external third-party bits (which we aren't building) in the
         # destination, so run an initial make that will fail, and then
         # clean them out
         with working_dir(self.build_directory):
             try:
-                make("all")
+                make("cc-clients")
             except:
                 pass
             filter_file(
@@ -64,6 +74,11 @@ class Triton(CMakePackage):
                 '',
                 'cc-clients/library/cmake_install.cmake'
             )
+            make("all")
+
+    def install(self, pkg, spec):
+        # the 'make all' installs, no 'make install'
+        return True
 
     def url_for_version(self, version):
         urlf = "https://github.com/triton-inference-server/client/archive/refs/heads/r{0}.zip"
