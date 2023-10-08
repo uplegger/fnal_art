@@ -109,6 +109,7 @@ class Larpandora(CMakePackage):
                 self.spec["py-torch"].prefix, self.spec["python"].version.up_to(2)
             ),
             "-DIGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
+            "-Dlarpandora_FW_DIR=fw",
         ]
         return args
 

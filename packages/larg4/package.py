@@ -98,7 +98,10 @@ class Larg4(CMakePackage):
     depends_on("cetmodules", type="build")
 
     def cmake_args(self):
-        args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]
+        args = [
+            "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
+            "-Dlarg4_FW_DIR=fw",
+        ]
         return args
 
     def flag_handler(self, name, flags):

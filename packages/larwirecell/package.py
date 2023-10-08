@@ -86,9 +86,32 @@ class Larwirecell(CMakePackage):
     patch("v09_04_03.patch", when="@09.04.03")
     patch("v09_04_05.patch", when="@09.04.05")
 
+    depends_on("boost")
     depends_on("larevt")
     depends_on("wirecell")
     depends_on("cetmodules", type="build")
+
+    def patch(self):
+        filter_file( 
+            r'list\(TRANSFORM _fwc_deps APPEND _FOUND', 
+            '',
+            'Modules/FindWireCell.cmake'
+        )
+        filter_file( 
+            r'OUTPUT_VARIABLE _fwc_fphsa_extra_required_vars\)', 
+            'set(_fwc_fphsa_extra_required_vars "")',
+            'Modules/FindWireCell.cmake'
+        )
+        filter_file(
+            r'Boost::stacktrace_basic', 
+            '', 
+            'Modules/FindWireCell.cmake'
+        )
+        filter_file(
+           r'find_package\(art ',
+           'find_package(Boost COMPONENTS graph headers date_time exception filesystem iostreams stacktrace_basic)\nfind_package(art ',
+           'CMakeLists.txt'
+        )
 
     def cmake_args(self):
         args = [

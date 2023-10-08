@@ -97,6 +97,7 @@ class Lardata(CMakePackage):
     depends_on("lardataobj")
     depends_on("lardataalg")
     depends_on("larvecutils", when="@09.04.vec02")
+    depends_on("larvecutils", when="@09.10:")  # not quite sure when the dependency came in...
     depends_on("range-v3")
     depends_on("fftw")
     depends_on("cetmodules", type="build")
