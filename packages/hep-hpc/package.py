@@ -18,7 +18,6 @@ class HepHpc(CMakePackage):
 
     version("0_14_02", sha256="2d89f7c4d40ad1c585b0bf2d1412124ffa6a0cc6d483ced30c3110ca89cee26f")
 
-
     variant(
         "cxxstd",
         default="17",
@@ -27,9 +26,37 @@ class HepHpc(CMakePackage):
         sticky=True,
         description="C++ standard",
     )
+
     variant("mpi", default=False, description="build with MPI support")
+
+    depends_on("googletest", type="build")
     depends_on("hdf5")
     depends_on("mpi", when="+mpi")
+
+    def patch(self):
+        # use external for googletest...
+        filter_file(
+           r'add_subdirectory\(gtest.*',
+           'find_package(GTest)',
+           'CMakeLists.txt'
+        )
+        filter_file(
+            r'include_directories\(gtest/googletest/include\)',
+            'include_directories(get_target_property(GTest::gtest INTERFACE_INCLUDE_DIRECTORIES))',
+            'test/CMakeLists.txt'
+        )
+        tcml = [
+             'test/hdf5/CMakeLists.txt', 
+             'test/MPI/CMakeLists.txt', 
+             'test/Utilities/CMakeLists.txt'
+        ]
+        for f in tcml:
+            filter_file(
+                r'target_link_libraries\((.*) gtest\)',
+                r'target_link_libraries(\1 GTest::gtest)',
+                f
+            )
+
 
     def cmake_args(self):
         args = [

@@ -84,6 +84,7 @@ class Larsoft(CMakePackage):
     patch("v09_37_01_01.patch", when="@09.37.01.01")
 
     depends_on("cetmodules", type="build")
+    depends_on("larfinder", type="build")
     depends_on("ifdh-art")
     depends_on("larana")
     depends_on("lareventdisplay")
