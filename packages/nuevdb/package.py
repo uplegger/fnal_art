@@ -78,6 +78,7 @@ class Nuevdb(CMakePackage):
 
     depends_on("cetmodules", type="build")
     depends_on("art-root-io")
+    depends_on("dk2nudata")
     depends_on("perl")
     depends_on("pythia6")
     depends_on("libwda")
@@ -96,10 +97,13 @@ class Nuevdb(CMakePackage):
             "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
             "-DCRYHOME={0}".format(self.spec["cry"].prefix),
             "-DIGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
+            "-Ddk2nudata_DIR:PATH={0}".format(self.spec["dk2nudata"].prefix),
+            "-Dlibwda_DIR:PATH={0}".format(self.spec["libwda"].prefix),
         ]
         return args
 
     def setup_build_environment(self, spack_env):
+        spack_env.set("POSTGRESQL_LIBRARIES", self.spec["postgresql"].prefix.lib)
         # Binaries.
         spack_env.prepend_path("PATH", os.path.join(self.build_directory, "bin"))
         # Ensure we can find plugin libraries.
@@ -116,7 +120,7 @@ class Nuevdb(CMakePackage):
 
     def setup_run_environment(self, run_env):
         # Binaries.
-        run_env.prepend_path("PATH", os.path.join(self.build_directory, "bin"))
+        run_env.prepend_path("PATH", os.path.join(self.prefix, "bin"))
         # Ensure we can find plugin libraries.
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
         # Ensure Root can find headers for autoparsing.

@@ -12,7 +12,7 @@ class Larbatch(Package):
     homepage = "https://cdcvs.fnal.gov/redmine/projects/larbatch-web-client/wiki"
     url = "https://github.com/LArSoft/larbatch/archive/refs/tags/v01_51_15.tar.gz"
 
-    version("01_51_15", sha256="f99dc422785286841260a168ec0681b0a3898fb5fad535cb3638837a6b6a988f")
+    version("01_51_15", sha256="0a105ec7deb46a9a16a31ab1e8f0864417be9e2fbe770542e9793b10424dbbd0")
 
     depends_on("sam-web-client", type=("run"))
     depends_on("python", type=("run"))

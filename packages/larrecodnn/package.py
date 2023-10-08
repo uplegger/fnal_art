@@ -91,6 +91,7 @@ class Larrecodnn(CMakePackage):
     patch("v09_09_09_02.patch", when="@09.09.09.02")
 
     depends_on("cetmodules", type="build")
+    depends_on("larfinder", type="build")
     depends_on("larcoreobj")
     depends_on("larcorealg")
     depends_on("larcore")
@@ -105,6 +106,7 @@ class Larrecodnn(CMakePackage):
     depends_on("nurandom")
     depends_on("art")
     depends_on("art-root-io")
+    depends_on("hep-hpc")
     depends_on("postgresql")
     depends_on("range-v3")
     depends_on("eigen")

@@ -87,6 +87,8 @@ class Larsim(CMakePackage):
         description="Use the specified C++ standard when building.",
     )
 
+    depends_on("nufinder")
+    depends_on("artg4tk")
     depends_on("larsoft-data")
     depends_on("larevt")
     depends_on("marley")
@@ -99,8 +101,12 @@ class Larsim(CMakePackage):
     depends_on("nug4")
     depends_on("nugen")
     depends_on("nurandom")
+    depends_on("ppfx")
     depends_on("sqlite")
     depends_on("cetmodules", type="build")
+
+    def patch(self):
+        filter_file(r'find_package\(nug4 ', 'find_package(nufinder)\nfind_package(nug4 ', 'CMakeLists.txt')
 
     def cmake_args(self):
         args = [
@@ -113,6 +119,7 @@ class Larsim(CMakePackage):
             "-DLARSOFT_DATA_VERSION=v{0}".format(self.spec["larsoft-data"].version.underscored),
             "-DIGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
             "-Dlarsim_MODULE_PLUGINS=FALSE",
+            "-Dlarsim_FW_DIR=fw",
         ]
         return args
 
