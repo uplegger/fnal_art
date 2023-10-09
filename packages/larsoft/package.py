@@ -79,6 +79,11 @@ class Larsoft(CMakePackage):
         multi=False,
         description="Use the specified C++ standard when building.",
     )
+    variant(
+        "eventdisplay",
+        default=True,
+        description = "Include lareventisplay and root/geant4 with opengl and x."
+    )
 
     patch("v09_35_00.patch", when="@09.35.00")
     patch("v09_37_01_01.patch", when="@09.37.01.01")
@@ -87,7 +92,6 @@ class Larsoft(CMakePackage):
     depends_on("larfinder", type="build")
     depends_on("ifdh-art")
     depends_on("larana")
-    depends_on("lareventdisplay")
     depends_on("larexamples")
     depends_on("larg4")
     depends_on("larpandora")
@@ -97,6 +101,18 @@ class Larsoft(CMakePackage):
     depends_on("larsoft-data")
     depends_on("larsoftobj")
     depends_on("larwirecell")
+    depends_on("lareventdisplay", when="+eventdisplay")
+    depends_on("root +opengl+x", when="+eventdisplay")
+    depends_on("root ~opengl~x", when="~eventdisplay")
+    depends_on("geant4 ~opengl~x11~qt", when="~eventdisplay")
+
+    def patch(self):
+        with when("~eventdisplay"):
+            filter_file(
+                r'find_package\( *lareventdisplay.*`',
+                '',
+                'CMakeLists.txt'
+            )
 
     def cmake_args(self):
         args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]
