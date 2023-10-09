@@ -33,6 +33,13 @@ class Nugen(CMakePackage):
     url = "https://github.com/NuSoftHEP/nugen/archive/refs/tags/v1_14_05.tar.gz"
     list_url = "https://api.github.com/repos/NuSoftHEP/nugen/tags"
 
+    version("1.19.05", sha256="effd672c0ce4d1f24f9ef7f24b8ea8549f085b769c1353d143226893794ba34e")
+    version("1.19.04", sha256="6b2e7492bcdfd0918a7e29e98363fe9b3c88edcdabd9e279dc1a428584369991")
+    version("1.19.03", sha256="828058b2a4a3e7bbfc680e7cd073b64d5b9a1d559cd39c0113336ed682b7bcb2")
+    version("1.19.02", sha256="1cf61ab4f28bc9bc360d694c0e3f5c7194068fcf8bc44d4ffcd1901ffb606612")
+    version("1.19.01", sha256="35a1fa5513037df79ee997599db8a18808615d13f455fdc81e59b09ad9b790a8")
+    version("1.19.00", sha256="e64bd9c05cee961768d589d2deb22714355550c8af0fecc60c439480b063b6d2")
+    version("1.16.07", sha256="b189ff126137be1db46aed98f8b0117dee990ac53c1e6c848b754c530cefd77f")
     version("1.15.00", sha256="098c9128b4d938e5a781c0b3535f7bc5f09e33c3b8280f2bc9927634fcdfc2c7")
     version("1.14.06", sha256="99642b9b3f05cf8cc886222303d43d4a4442583ce7a5c7a872871aacdc45df53")
     version("1.14.05", sha256="e2cb16b5855e54a442cdfba42a40ca87e4d17d8156cbb2678205e0e5565a7b6c")
@@ -80,6 +87,7 @@ class Nugen(CMakePackage):
     depends_on("cmake@3.12:", type="build")
     depends_on("cetmodules", type="build")
     depends_on("catch2@2.3.0:", type="build")
+    depends_on("nufinder",type="build")
 
     # Build and link dependencies.
     depends_on("clhep")
@@ -121,7 +129,7 @@ class Nugen(CMakePackage):
         # Set CMake args.
         args = [
             "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-            "IGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
+            "-DIGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
             "-DGENIE_INC={0}".format(self.spec["genie"].prefix.include),
         ]
         return args
@@ -145,7 +153,7 @@ class Nugen(CMakePackage):
 
     def setup_run_environment(self, run_env):
         # Binaries.
-        run_env.prepend_path("PATH", os.path.join(self.build_directory, "bin"))
+        run_env.prepend_path("PATH", os.path.join(self.prefix, "bin"))
         # Ensure we can find plugin libraries.
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
         # Ensure Root can find headers for autoparsing.

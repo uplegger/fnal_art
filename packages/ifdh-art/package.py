@@ -33,8 +33,10 @@ class IfdhArt(CMakePackage):
     list_url = "https://api.github.com/repos/art-framework-suite/ifdh-art/tags"
 
 
+
     version("2.17.00", sha256="d6f10c2516450550f48441f58867456a3dbdccd1c80d6a61bff7095becba3751")
     version("2.16.02", sha256="a39d83228f4c41463ef95bb44abf4f8c857c1c27d91d4e0376f623a99a82ba11")
+    version("2.15.06", sha256="a3bf2771c1a3a1cd537128eb1a3a7a4848ea0b97471db8b6d250db192d668a7d")
     version("2.13.14", sha256="e71b3413ac8bad210d6e960ee3c17de92bd34958510c020f1c2005efc5269989")
     version("2.13.13", sha256="215d738a0cb4a40c51346c4eaf36358667a1ca52aa703bc89e427fc493603d82")
     version("2.13.00", sha256="d9b59c4181051d6b86ee346c562faaac7d4c5c0eeef37f159e2b1757859d4516")

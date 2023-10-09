@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
+import os
 
 
 class Dk2nudata(CMakePackage):
@@ -12,6 +13,7 @@ class Dk2nudata(CMakePackage):
     homepage = "https://cdcvs.fnal.gov/redmine/projects/dk2nu"
     url = "https://cdcvs.fnal.gov/subversion/dk2nu/tags/v01_07_02"
 
+    version("01.10.01", revision="155", svn="https://cdcvs.fnal.gov/subversion/dk2nu/trunk")
     version("01.10.00", revision="154", svn="https://cdcvs.fnal.gov/subversion/dk2nu/trunk")
     version("01.09.02", revision="153", svn="https://cdcvs.fnal.gov/subversion/dk2nu/trunk")
     version("01.09.01", revision="152", svn="https://cdcvs.fnal.gov/subversion/dk2nu/trunk")
@@ -34,14 +36,17 @@ class Dk2nudata(CMakePackage):
     depends_on("tbb")
     depends_on("libxml2")
     depends_on("log4cpp")
-    depends_on("tbb")
 
     parallel = False
 
     root_cmakelists_dir = "dk2nu"
 
     def cmake_args(self):
-        args = ["-DWITH_GENIE=OFF", "-DTBB_LIBRARY=%s/libtbb.so" % self.spec["tbb"].prefix.lib]
+        if os.path.exists(self.spec["tbb"].prefix.lib64):
+            tbblib=self.spec["tbb"].prefix.lib64
+        else:
+            tbblib=self.spec["tbb"].prefix.lib
+        args = ["-DWITH_GENIE=OFF", "-DTBB_LIBRARY=%s/libtbb.so" % tbblib]
         return args
 
     def setup_dependent_build_environment(self, spack_env, dspec):

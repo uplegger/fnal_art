@@ -31,7 +31,7 @@ class Messagefacility(CMakePackage):
     version("2.08.03", sha256="bf10264d94e77e14c488e02107e36e676615fa12c9e2795c4caccf0c913ba7b9")
     version("2.08.00", sha256="a2c833071dfe7538c40a0024d15f19ba062fd5f56b26f83f5cb739c12ff860ec")
     version("2.07.00", sha256="cdcbcf649b3d90fcfeeb6a11bfb09fe72fda3eb93120042b9a91a599f5baf9c2")
-    version("develop", branch="develop", get_full_repo=True)
+    version("develop", branch="develop")
 
     variant(
         "cxxstd",

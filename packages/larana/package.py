@@ -33,6 +33,8 @@ class Larana(CMakePackage):
     url = "https://github.com/LArSoft/larana/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larana/tags"
 
+    version("09.14.08", sha256="61fa67c3764f37112af55fff17ab3e573a9ae4b068b3c8e437aca184741d14a3") # FIX ME
+    version("09.14.05", sha256="f67962e535fd68e5d3b69fa875edbcf0248a021d161136eaee409fed0e4104a2")
     version(
         "09.03.09.01", sha256="162712cd2506c443799b5e055a63370977ce9384d7a88925f0fda030362b95bf"
     )
@@ -84,7 +86,10 @@ class Larana(CMakePackage):
     depends_on("cetmodules", type="build")
 
     def cmake_args(self):
-        args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]
+        args = [
+           "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
+           "-Dlarana_FW_DIR=fw",
+        ]
         return args
 
     def setup_build_environment(self, spack_env):

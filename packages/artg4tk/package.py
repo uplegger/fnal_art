@@ -9,9 +9,9 @@ from spack import *
 class Artg4tk(CMakePackage):
     """Artg4tk"""
 
-    homepage = "https://cdcvs.fnal.gov/redmine/projects/artg4tk/wiki"
-    url = "https://cdcvs.fnal.gov/cgi-bin/git_archive.cgi/cvs/projects/artg4tk.v10_02_01.tbz2"
-    git_base = "https://cdcvs.fnal.gov/projects/artg4tk"
+    homepage = "https://github.com/art-framework-suite/art-g4tk/"
+    url = "https://github.com/art-framework-suite/art-g4tk/archive/refs/tags/v11_00_01.tar.gz"
+    git_base = "https://github.com/art-framework-suite/art-g4tk.git"
 
     # version('10.04.00', sha256='44a1e12425ff2ebe90f7482ad2b10cbde873477815f81707677eb2ad14d3cef4')
     version("10.04.00", tag="v10_04_00", git=git_base, get_full_repo=True)
@@ -24,6 +24,7 @@ class Artg4tk(CMakePackage):
     version("develop", branch="develop", git=git_base, get_full_repo=True)
     version("mwm1", branch="mwm1", git=git_base, get_full_repo=True)
     version("MVP1a", branch="feature/Spack-MVP1a", git=git_base, get_full_repo=True)
+    version("11.00.01", tag="v11_00_01", git=git_base, get_full_repo=True)
     version("10.02.01", tag="v10_02_01", git=git_base, get_full_repo=True)
     version("10.02.01.01", tag="v10_02_01_01", git=git_base, get_full_repo=True)
     version("09.04.04", tag="v09_04_04", git=git_base, get_full_repo=True)

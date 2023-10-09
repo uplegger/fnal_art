@@ -33,9 +33,12 @@ class Larpandora(CMakePackage):
     url = "https://github.com/LArSoft/larpandora/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larpandora/tags"
 
+
     version(
         "09.30.00.rc1", sha256="13e428169579c7e45246920abb1f9165c067a8b662938a372633f4522ca5d084"
     )
+    version("09.21.09", sha256="1acdc3ba6926d4715f0eccd78b1bba4e967e1c5825884a0b30ee55de4cb1cfe2") # FIX ME
+    version("09.21.05", sha256="7b0a68ccecd556fcde56dcbbdcde2664d6456778d43ec42d5e7e3518747da88e")
     version(
         "09.10.02.02", sha256="593b9702723987060ac957127e23e306a651a1768221d513e9b437f11d5125eb"
     )
@@ -106,6 +109,7 @@ class Larpandora(CMakePackage):
                 self.spec["py-torch"].prefix, self.spec["python"].version.up_to(2)
             ),
             "-DIGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
+            "-Dlarpandora_FW_DIR=fw",
         ]
         return args
 

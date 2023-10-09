@@ -31,6 +31,8 @@ class Wirecell(Package):
     homepage = "https://wirecell.github.io"
     url = "https://github.com/WireCell/wire-cell-toolkit/archive/refs/tags/0.13.0.tar.gz"
 
+    version("0.24.3", sha256="040d819a3a81b953a42c8b4bb898acf6978cee45beea0361a2f3cdb602a6028c") # FIX ME
+    version("0.24.1", sha256="0467a4dff51abac3661aa99c5f3cc5de1ba1607a7f357631a2fbf7dcdf01c8a9")
     version("0.17.0", sha256="f2807adb83c8c6960ccefe8002bd015d646a96ad181d2092848d2461b3b81eea")
     version("0.16.0", sha256="af04affc1642c6ea534c479f0e1701e74b43674c2ebc025a117849ac0aba9cee")
     version("0.14.0", sha256="f7d792ef3c73744b395a6880018a4ba3349f2c5ba2f96399ad1a4d17be8f6092")

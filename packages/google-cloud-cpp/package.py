@@ -48,6 +48,15 @@ class GoogleCloudCpp(CMakePackage):
 
     patch("absl-make-unique.patch")
 
+    def patch(self):
+        # this file is missing an include for <thread> ...
+        filter_file(
+           r"namespace google \{", 
+           "#include <thread>\nnamespace google {",
+           "google/cloud/bigtable/tests/data_integration_test.cc"
+        )
+
+
     def cmake_args(self):
         # FIXME: Add arguments other than
         # FIXME: CMAKE_INSTALL_PREFIX and CMAKE_BUILD_TYPE
