@@ -105,6 +105,7 @@ class Larsoft(CMakePackage):
     depends_on("root +opengl+x", when="+eventdisplay")
     depends_on("root ~opengl~x", when="~eventdisplay")
     depends_on("geant4 ~opengl~x11~qt", when="~eventdisplay")
+    depends_on("pandora ~monitoring", when="~eventdisplay")
 
     def patch(self):
         with when("~eventdisplay"):

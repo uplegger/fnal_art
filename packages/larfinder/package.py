@@ -18,6 +18,8 @@ class Larfinder(CMakePackage):
 
     version("09_79_00", sha256="af26656bca92225d0e741f6c96c50b382f5ab2170409272b107ff8e564a3b46c")
 
+    depends_on("cetmodules", type="build")
+
     def cmake_args(self):
         args = []
         return args

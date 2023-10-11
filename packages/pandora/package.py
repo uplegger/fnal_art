@@ -34,8 +34,15 @@ class Pandora(CMakePackage):
         multi=False,
         description="Use the specified C++ standard when building.",
     )
+    variant(
+       "monitoring",
+       default=True,
+       description="Enable PandoraMonitoring when building."
+    )
 
-    depends_on("root")
+    depends_on("root +opengl", when="+monitoring")
+    depends_on("root ~opengl", when="~monitoring")
+
     depends_on("eigen")
 
 
@@ -82,7 +89,7 @@ class Pandora(CMakePackage):
                 self.spec.variants["cxxstd"].value
             ),
             "-DCMAKE_MODULE_PATH={0}/etc/cmake".format(self.spec["root"].prefix),
-            "-DPANDORA_MONITORING=ON",
+            "-DPANDORA_MONITORING={0}".format("ON" if self.spec.variants["monitoring"] else "OFF"),
             "-DLC_PANDORA_CONTENT=ON",
             "-DLAR_PANDORA_CONTENT=ON",
             "-DINSTALL_DOC=OFF",
