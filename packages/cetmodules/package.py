@@ -25,6 +25,7 @@ class Cetmodules(CMakePackage):
     version("3.21.01", sha256="9f4b845f9ed09fb3a8ee7864ac487afd08a5b3e64abf394831ee927f91b08ebc")
     version("3.21.02", sha256="255d6d6c2455217734b208fc90919b90bc7c0f9a59a4706d329c642bff51f004")
     version("3.22.01", sha256="c72c47328adc0c95f905aae119c76d35513a0677f20163f0ef25a82bd0f72082")
+    version("3.22.02", sha256="bbd6a80ab3c495e49b3545230c97ae880755a5f1d39b71d89f07297bf835e5da")
 
     variant(
         "versioned-docs", default=False, description="build versioned docs with a landing page"
@@ -37,7 +38,7 @@ class Cetmodules(CMakePackage):
         "git@2.22:",
         "py-sphinxcontrib-moderncmakedomain",
         "py-sphinx-design@0.2.0:",
-        "py-sphinx@5:5.999",
+        "py-sphinx@5:",
     )
     for dep in docs_deps:
         depends_on(dep, type="build", when="+docs")

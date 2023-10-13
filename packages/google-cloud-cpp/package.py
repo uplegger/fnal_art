@@ -55,6 +55,7 @@ class GoogleCloudCpp(CMakePackage):
            "#include <thread>\nnamespace google {",
            "google/cloud/bigtable/tests/data_integration_test.cc"
         )
+        filter_file(r'#include <vector>', '#include <vector>\n#include <cstdint>', 'google/cloud/iam_bindings.h')
 
 
     def cmake_args(self):
