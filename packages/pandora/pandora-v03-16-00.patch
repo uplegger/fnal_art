@@ -75,15 +75,3 @@ diff -Naur LCContent-v03-01-05/src/LCPlugins/LCSoftwareCompensation.cc LCContent
  }
  
  } // namespace lc_content
-diff -Naur PandoraMonitoring-v03-05-00/include/TTreeWrapper.h PandoraMonitoring-v03-05-00/include/TTreeWrapper.h
---- PandoraMonitoring-v03-05-00/include/TTreeWrapper.h	2020-06-26 03:59:42.000000000 -0500
-+++ PandoraMonitoring-v03-05-00/include/TTreeWrapper.h	2023-03-09 10:08:03.623846954 -0600
-@@ -56,8 +56,6 @@
- 
-         Branch(TTree *tree, const std::string &branchName);
- 
--        ~Branch();
--
-         void Set(T variable);
- 
-     private:

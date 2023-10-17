@@ -81,7 +81,7 @@ class Pandora(CMakePackage):
             with working_dir(self.stage.source_path):
                 patch("-p0", "-t", "-i", 
                        os.path.join(pdir,"pandora-v03-16-00.patch"))
-                with when("+monitoring"):
+                if self.spec.variants["monitoring"].value:
                     patch("-p0", "-t", "-i", 
                            os.path.join(pdir,"pandora-monitoring-v03-16-00.patch"))
 
