@@ -71,13 +71,11 @@ class Dk2nugenie(CMakePackage):
             "-DGENIE=%s" % self.spec["genie"].prefix,
             "-DGENIE_VERSION=%s" % self.spec["genie"].version,
             "-DDK2NUDATA_DIR=%s" % self.spec["dk2nudata"].prefix.lib,
+            "-DLIBXML2_INC=%s" % self.spec["libxml2"].prefix.include,
+            "-DLOG4CPP_INC=%s" % self.spec["log4cpp"].prefix.include,
         ]
 
         return args
-
-    def build(self, spec, prefix):
-        with working_dir(self.build_directory, create=True):
-            make("VERBOSE=t", "all")
 
     def setup_dependent_build_environment(self, spack_env, dspec):
         # Ensure we can find plugin libraries.

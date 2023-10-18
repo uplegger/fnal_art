@@ -33,6 +33,7 @@ class Nugen(CMakePackage):
     url = "https://github.com/NuSoftHEP/nugen/archive/refs/tags/v1_14_05.tar.gz"
     list_url = "https://api.github.com/repos/NuSoftHEP/nugen/tags"
 
+    version("1.19.06", sha256="718c2fb406fbebefd18d8906ca313513dfdd9d0ff4bda7cf6aff842c84f1ca2d")
     version("1.19.05", sha256="effd672c0ce4d1f24f9ef7f24b8ea8549f085b769c1353d143226893794ba34e")
     version("1.19.04", sha256="6b2e7492bcdfd0918a7e29e98363fe9b3c88edcdabd9e279dc1a428584369991")
     version("1.19.03", sha256="828058b2a4a3e7bbfc680e7cd073b64d5b9a1d559cd39c0113336ed682b7bcb2")

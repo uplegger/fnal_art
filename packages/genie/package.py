@@ -84,6 +84,10 @@ class Genie(AutotoolsPackage):
     patch("patch/GENIE-Generator.patch", when="@3.04.00")
     patch("patch/GENIE-Reweight.patch", when="@3.04.00", level=0)
 
+    @when("os=almalinux9")
+    def patch(self):
+        filter_file(r'-lnsl','','src/make/Make.include')
+
     @property
     def build_targets(self):
         cxxstd = self.spec.variants["cxxstd"].value

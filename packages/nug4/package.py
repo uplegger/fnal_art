@@ -33,6 +33,7 @@ class Nug4(CMakePackage):
     url = "https://github.com/NuSoftHEP/nug4/archive/refs/tags/v1_10_00.tar.gz"
     list_url = "https://api.github.com/repos/NuSoftHEP/nug4/tags"
 
+    version("1.15.02", sha256="53dcc4998a9e4841739cfbc7ee2e5cb312321cb1be2591af891f39ff7d306ed7")
     version("1.15.01", sha256="839ff89b3f85b9482384df946d5c13a0c7c941e4bdfd2d2955e36c290811d926")
     version("1.15.00", sha256="cc2b39a9e9888898f07f10467c7521b1c99f99e6a3528902b4a77e866a2791c3")
     version("1.14.03", sha256="6ef9cfc8ec87b4e27dda47421cfa293da853738ece6604d2b15994ce05ba74d3")
@@ -81,12 +82,14 @@ class Nug4(CMakePackage):
     # Build-only dependencies.
     depends_on("cetmodules", type="build")
     depends_on("cetbuildtools", type="build")
+    depends_on("cmake", type="build")
     depends_on("art")
     depends_on("art-root-io")
     depends_on("boost")
     depends_on("nusimdata")
     depends_on("cetlib")
     depends_on("cetlib-except")
+    depends_on("geant4 cxxstd=20", when="cxxstd=20")
     depends_on("geant4 cxxstd=17", when="cxxstd=17")
     depends_on("geant4 cxxstd=14", when="cxxstd=14")
     depends_on("pythia8")
