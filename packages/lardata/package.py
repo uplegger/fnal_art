@@ -60,6 +60,7 @@ class Lardata(CMakePackage):
         "mwm1", tag="mwm1", git="https://github.com/marcmengel/lardata.git", get_full_repo=True
     )
 
+
     def url_for_version(self, version):
         url = "https://github.com/LArSoft/{0}/archive/v{1}.tar.gz"
         return url.format(self.name, version.underscored)
@@ -92,7 +93,9 @@ class Lardata(CMakePackage):
     patch("v09_04_02_larvecutils.patch", when="@09.04.vec02")
     patch("v09_04_02.patch", when="@09.04.02")
 
+    depends_on("boost +date_time+serialization")
     depends_on("nutools")
+    depends_on("nusimdata")
     depends_on("larcore")
     depends_on("lardataobj")
     depends_on("lardataalg")
