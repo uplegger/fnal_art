@@ -107,6 +107,10 @@ class Larsim(CMakePackage):
 
     def patch(self):
         filter_file(r'find_package\(nug4 ', 'find_package(nufinder)\nfind_package(nug4 ', 'CMakeLists.txt')
+        filter_file(r'math_tr1', '', 'CMakeLists.txt')
+        filter_file(r'Boost::math_tr1', '', 'larsim/LegacyLArG4/CMakeLists.txt')
+        filter_file(r'Boost::math_tr1', '', 'larsim/PhotonPropagation/CMakeLists.txt')
+        
 
     def cmake_args(self):
         args = [

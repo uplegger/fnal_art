@@ -80,16 +80,35 @@ class Larpandoracontent(CMakePackage):
         description="Use the specified C++ standard when building.",
     )
 
+    variant(
+       "monitoring",
+       default=True,
+       description="Enable PandoraMonitoring when building."
+    )
+
     depends_on("cetmodules", type="build")
     depends_on("eigen")
-    depends_on("pandora")
+    depends_on("pandora +monitoring" , when="+monitoring")
+    depends_on("pandora ~monitoring" , when="~monitoring")
     depends_on("py-torch")
+
+
+    def patch(self):
+        filter_file(r"set\(PANDORA_MONITORING TRUE\)","","CMakeLists.txt")
+
+        if not self.spec.variants["monitoring"].value: 
+            filter_file(
+               r"(PandoraPFA::PandoraMonitoring|MONITORING)",
+               "", 
+               "larpandoracontent/CMakeLists.txt",
+            )
+
 
     def cmake_args(self):
         args = [
             "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
             "-DCMAKE_MODULE_PATH={0}/cmakemodules".format(self.spec["pandora"].prefix),
-            "-DPANDORA_MONITORING=ON",
+            "-DPANDORA_MONITORING={0}".format("ON" if self.spec.variants["monitoring"].value else "OFF"),
             "-DLAR_CONTENT_LIBRARY_NAME=LArPandoraContent",
             "-DPandoraSDK_DIR={0}/cmakemodules".format(self.spec["pandora"].prefix),
             "-DPandoraMonitoring_DIR={0}/cmakemodules".format(self.spec["pandora"].prefix),

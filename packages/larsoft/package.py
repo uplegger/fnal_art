@@ -95,6 +95,8 @@ class Larsoft(CMakePackage):
     depends_on("larexamples")
     depends_on("larg4")
     depends_on("larpandora")
+    depends_on("larpandoracontent +monitoring", when="+eventdisplay")
+    depends_on("larpandoracontent ~monitoring", when="~eventdisplay")
     depends_on("larreco")
     depends_on("larrecodnn")
     depends_on("larsimrad")
@@ -110,7 +112,7 @@ class Larsoft(CMakePackage):
     def patch(self):
         with when("~eventdisplay"):
             filter_file(
-                r'find_package\( *lareventdisplay.*`',
+                r'find_package\( *lareventdisplay.*',
                 '',
                 'CMakeLists.txt'
             )

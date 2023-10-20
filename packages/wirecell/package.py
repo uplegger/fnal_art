@@ -65,7 +65,8 @@ class Wirecell(Package):
     depends_on("root@6:")
 
     # match what is listed in wire-cell-build/wscript
-    depends_on("boost")
+    depends_on("boost +system+filesystem+graph+thread+program_options+iostreams")
+
 
     patch("setprecisionfix.patch", when="@0.14.0")
     patch("boost_spline.patch", when="@0.14.0")
