@@ -15,7 +15,7 @@ class MuseExternals(BundlePackage):
     version("1.0")
     version("develop")
 
-    maintainers("marcmengel", "rclee", "kutschke")
+    maintainers = ["marcmengel", "rclee", "kutschke"]
 
     with when("@develop"):
         depends_on("artdaq-core-mu2e", type=("build", "run"))

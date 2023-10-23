@@ -14,7 +14,7 @@ class HepHpc(CMakePackage):
     url = "https://github.com/art-framework-suite/hep-hpc/archive/refs/tags/v0_14_02.tar.gz"
     git = "https://github.com/art-framework-suite/hep-hpc.git"
 
-    maintainers("marcmengel")
+    maintainers = ["marcmengel"]
 
     version("0_14_02", sha256="2d89f7c4d40ad1c585b0bf2d1412124ffa6a0cc6d483ced30c3110ca89cee26f")
 
