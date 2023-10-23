@@ -81,6 +81,9 @@ class Pandora(CMakePackage):
             with working_dir(self.stage.source_path):
                 patch("-p0", "-t", "-i", 
                        os.path.join(pdir,"pandora-v03-16-00.patch"))
+                if self.spec.variants["monitoring"].value:
+                    patch("-p0", "-t", "-i", 
+                           os.path.join(pdir,"pandora-monitoring-v03-16-00.patch"))
 
     def cmake_args(self):
         args = [
@@ -89,7 +92,7 @@ class Pandora(CMakePackage):
                 self.spec.variants["cxxstd"].value
             ),
             "-DCMAKE_MODULE_PATH={0}/etc/cmake".format(self.spec["root"].prefix),
-            "-DPANDORA_MONITORING={0}".format("ON" if self.spec.variants["monitoring"] else "OFF"),
+            "-DPANDORA_MONITORING={0}".format("ON" if self.spec.variants["monitoring"].value else "OFF"),
             "-DLC_PANDORA_CONTENT=ON",
             "-DLAR_PANDORA_CONTENT=ON",
             "-DINSTALL_DOC=OFF",

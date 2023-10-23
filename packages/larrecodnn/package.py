@@ -115,6 +115,8 @@ class Larrecodnn(CMakePackage):
     depends_on("triton")
     depends_on("protobuf")
     depends_on("tbb")
+    depends_on("grpc")
+    depends_on("re2")
 
     def cmake_args(self):
         args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]

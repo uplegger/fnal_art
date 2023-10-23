@@ -176,7 +176,7 @@ class Sbncode(CMakePackage):
 
     def setup_run_environment(self, run_env):
         # Binaries.
-        run_env.prepend_path("PATH", os.path.join(self.build_directory, "bin"))
+        run_env.prepend_path("PATH", os.path.join(self.prefix, "bin"))
         # Ensure we can find plugin libraries.
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
         # Ensure Root can find headers for autoparsing.
