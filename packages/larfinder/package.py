@@ -14,7 +14,7 @@ class Larfinder(CMakePackage):
     homepage = "https://github.com/LArSoft"
     url = "https://github.com/LArSoft/larfinder/archive/refs/tags/LARSOFT_SUITE_v09_79_00.tar.gz"
 
-    maintainers("marcmengel")
+    maintainers = ["marcmengel"]
 
     version("09_79_00", sha256="af26656bca92225d0e741f6c96c50b382f5ab2170409272b107ff8e564a3b46c")
 

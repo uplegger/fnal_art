@@ -14,7 +14,7 @@ class Triton(CMakePackage):
     homepage = "https://github.com/triton-inference-server/client"
     url = "https://github.com/triton-inference-server/client/archive/refs/heads/r23.09.zip"
 
-    maintainers("marcmengel")
+    maintainers = ["marcmengel"]
 
     version( "23.09", sha256="33ece9b6a0ee3c6b198afde5e955ec53bb5c2c30eafbb80f9bd940619f14307b")
 

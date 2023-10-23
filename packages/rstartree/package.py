@@ -14,7 +14,7 @@ class Rstartree(MakefilePackage):
     url = "https://github.com/virtuald/r-star-tree.git"
     git = "https://github.com/virtuald/r-star-tree.git"
 
-    maintainers("marcmengel")
+    maintainers = ["marcmengel"]
 
     version("0.2", git=git, commit="65f37ac95a77315fde1d24ab8081ab82540c1d50")
     version("0.1", git=git, commit="845ae41c122b4302e5a7cc53614c33f4c077db0a")

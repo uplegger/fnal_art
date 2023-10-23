@@ -14,6 +14,7 @@ class Kinkal(CMakePackage):
 
     # notify when the package is updated.
     # maintainers("github_user1", "github_user2")
+    maintainers = ['mengel']
 
     #version("2.4.2", sha256="7a9aebf925fb2f354ccd5483078661767db7ced59e826ce234effe0e7bc49aa7")
     #version("2.4.1", sha256="ee239f6f9d396d02da6523fb4961f78c55494439775ffcef83aa1362854d2f19")

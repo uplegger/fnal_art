@@ -15,7 +15,7 @@ class Ppfx(CMakePackage):
     url = "https://cdcvs.fnal.gov/cgi-bin/git_archive.cgi/cvs/projects/ppfx.v02_18_03.tbz2"
     url_soon =  "https://github.com/kordosky/ppfx/archive/tag/v02.13.03.tar.gz"
 
-    maintainers("marcmengel", "kordosky")
+    maintainers = ["marcmengel", "kordosky"]
 
     def url_for_version(self, version):
         urlf = "https://cdcvs.fnal.gov/cgi-bin/git_archive.cgi/cvs/projects/ppfx.v{0}.tbz2"
