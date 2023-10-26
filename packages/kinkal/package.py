@@ -16,9 +16,10 @@ class Kinkal(CMakePackage):
     # maintainers("github_user1", "github_user2")
     maintainers = ['mengel']
 
-    #version("2.4.2", sha256="7a9aebf925fb2f354ccd5483078661767db7ced59e826ce234effe0e7bc49aa7")
-    #version("2.4.1", sha256="ee239f6f9d396d02da6523fb4961f78c55494439775ffcef83aa1362854d2f19")
-    #version("2.4.0", sha256="638323087e11d03a10f6499080ef8e5a6edcb976f79843ee39b81bfbda3dca2a")
+    version("2.4.3", sha256="543b9b3569242f298c7c433ba45945e38a440c4fb410029946318d2e2202ee6e")
+    version("2.4.2", sha256="7a9aebf925fb2f354ccd5483078661767db7ced59e826ce234effe0e7bc49aa7")
+    version("2.4.1", sha256="ee239f6f9d396d02da6523fb4961f78c55494439775ffcef83aa1362854d2f19")
+    version("2.4.0", sha256="638323087e11d03a10f6499080ef8e5a6edcb976f79843ee39b81bfbda3dca2a")
     version("2.3.1", sha256="25dbfcbd684010cd61eb34b46c4416a52ca53ab1c95b5d9e20f551da5cab2fbb")
     version("2.3.0", sha256="33522e797cbfa0b4953de74028ef573ffe7c2067eafa4d27bc51627b1c64ab6d")
     version("2.2.1", sha256="6fa99d0d4265d7d857936f02f2d2a605e2d6109b7e017f74568ef2f2cf4525c3")
