@@ -91,12 +91,14 @@ class ArtRootIo(CMakePackage):
         sanitize_environments(env, "CET_PLUGIN_PATH")
 
     def setup_dependent_build_environment(self, env, dependent_spec):
+        prefix = self.prefix
         # Ensure we can find plugin libraries.
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Cleanup.
         sanitize_environments(env, "CET_PLUGIN_PATH")
 
     def setup_dependent_run_environment(self, env, dependent_spec):
+        prefix = self.prefix
         # Ensure we can find plugin libraries.
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Cleanup.
