@@ -40,7 +40,8 @@ class Cetlib(CMakePackage):
 
     depends_on("boost+regex+program_options+filesystem+system+test")
     depends_on("cetlib-except")
-    depends_on("hep-concurrency")
+    depends_on("hep-concurrency", when="@3.19:", type=("build", "test"))
+    depends_on("hep-concurrency", when="@:3.18.99")
     depends_on("openssl")
     depends_on("perl", type=("build", "run"))
     depends_on("sqlite@3.8.2:")
