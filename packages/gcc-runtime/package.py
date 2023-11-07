@@ -36,10 +36,11 @@ class GccRuntime(Package):
     def install(self, spec, prefix):
          libdir=''
          cdir = os.path.dirname(os.path.dirname(self.compiler.cxx))
+         # find shortest pathname in cdir that has libstdc++.so in it...
          for path, dirnames, filenames in os.walk(cdir):
              if 'libstdc++.so' in filenames:
-                 libdir = path
-                 break
+                 if not libdir or len(path) < len(libdir):
+                     libdir = path
          if libdir:
              os.makedirs(prefix.lib)
              install_tree(libdir, prefix.lib)
