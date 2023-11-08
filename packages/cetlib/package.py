@@ -40,15 +40,15 @@ class Cetlib(CMakePackage):
 
     depends_on("boost+regex+program_options+filesystem+system+test")
     depends_on("cetlib-except")
-    depends_on("hep-concurrency")
+    depends_on("hep-concurrency", when="@3.19:", type=("build", "test"))
+    depends_on("hep-concurrency", when="@:3.18.99")
     depends_on("openssl")
     depends_on("perl", type=("build", "run"))
     depends_on("sqlite@3.8.2:")
-    depends_on("tbb")
     depends_on("catch2@3:", when="@3.17:", type=("build", "test"))
     depends_on("catch2@2.3.0:", when="@:3.16.99", type=("build", "test"))
     depends_on("catch2", type=("build", "test"))
-    depends_on('cetmodules', type='build')
+    depends_on("cetmodules", type="build")
     conflicts("cetmodules@:3.21.00", when="catch2@3:")
 
     if "SPACK_CMAKE_GENERATOR" in os.environ:
