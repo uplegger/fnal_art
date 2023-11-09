@@ -21,6 +21,8 @@ class Cetlib(CMakePackage):
     git = "https://github.com/art-framework-suite/cetlib.git"
     url = "https://github.com/art-framework-suite/cetlib/archive/refs/tags/v3_17_00.tar.gz"
 
+    version("3.18.01", sha256="7e8b39e6ad0dce26d7fa41985d962fd2f97113403511bad0134c86ccee0e17ae")
+    version("3.18.00", sha256="bf559b054af5881ef9e1b7ef91bb722fd255e178edbeca204d201584ee277fee")
     version("3.17.01", sha256="c29add5c9085e1fadc8f5fbdb1cd9b666d2290bd252022cef1feb0c30368d597")
     version("3.17.00", sha256="04160b9607948b329465b60271ca735c449f3bf7d53e31a44ec3107cc6aafe26")    
     version("3.16.00", sha256="a0e670a5144b215c9a6641d0b9b35512790d9ba4b638e213651f5040417f4070")
@@ -40,8 +42,8 @@ class Cetlib(CMakePackage):
 
     depends_on("boost+regex+program_options+filesystem+system+test")
     depends_on("cetlib-except")
-    depends_on("hep-concurrency", when="@3.19:", type=("build", "test"))
-    depends_on("hep-concurrency", when="@:3.18.99")
+    depends_on("hep-concurrency", when="@3.18.01:", type=("build", "test"))
+    depends_on("hep-concurrency", when="@:3.18.00")
     depends_on("openssl")
     depends_on("perl", type=("build", "run"))
     depends_on("sqlite@3.8.2:")
