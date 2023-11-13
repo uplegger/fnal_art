@@ -26,7 +26,14 @@ class Jsonnet(Package):
         description="Use the specified C++ standard when building.",
     )
 
-    # depends_on('bazel', type='build')
+    def patch(self):
+        with( when("@:0.19.1 %gcc@13:")):
+            filter_file(
+                r"#include \<cstring\>",
+                r"#include <cstdint>\n#include <cstring>",
+                "include/libjsonnet++.h"       
+            )
+
 
     def install(self, spec, prefix):
         "Install JSonnet"

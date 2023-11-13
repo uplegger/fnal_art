@@ -66,6 +66,7 @@ class Pandora(CMakePackage):
             "cmakemodules/MacroPandoraGeneratePackageConfigFiles.cmake",
         )
 
+
     # apply patch to 3.16.00 (to clear warnings in newer compilers)
     # we have to apply our this patch *after* the initial
     # cmake run because that and then a "make" downloads the sources we
@@ -75,15 +76,32 @@ class Pandora(CMakePackage):
         patch = which("patch") 
         make = which("make")
         pdir = os.path.dirname(__file__)
+
         with when("@03.16.00"):
             with working_dir(self.build_directory):
-                make("LCContent","LArContent")
+                make("PandoraSDK", output="make-0.out", error="make-0.err", fail_on_error=False)
+
             with working_dir(self.stage.source_path):
+                g = glob.glob("PandoraSDK-v*")
+                if g:
+                   gd = g[0]
+                else:
+                   gd = "PandoraSDK"
+                filter_file(
+                    '#include <vector>',
+                    '#include <vector>\n#include <cstdint>',
+                    gd + '/include/Pandora/PandoraInternal.h',
+                )
+
+            with working_dir(self.build_directory):
+                make("LCContent","LArContent")
+
+            with working_dir(self.build_directory):
                 patch("-p0", "-t", "-i", 
-                       os.path.join(pdir,"pandora-v03-16-00.patch"))
+                       os.path.join(pdir,"pandora-v03-16-00.patch"), fail_on_error=False)
                 if self.spec.variants["monitoring"].value:
                     patch("-p0", "-t", "-i", 
-                           os.path.join(pdir,"pandora-monitoring-v03-16-00.patch"))
+                           os.path.join(pdir,"pandora-monitoring-v03-16-00.patch"), fail_on_error=False)
 
     def cmake_args(self):
         args = [

@@ -82,6 +82,15 @@ class Lardataalg(CMakePackage):
     patch("v09_07_00.patch", when="@09.07.00")
     patch("v09_07_02.patch", when="@09.07.02")
 
+    def patch(self):
+        with(when("@:09.16.04 %gcc@13:")):
+            filter_file(
+                '#include <string>',
+                '#include <cstdint>\n#include <string>',
+                'lardataalg/DetectorInfo/RunHistoryStandard.h',
+            )
+
+
     variant(
         "cxxstd",
         default="17",

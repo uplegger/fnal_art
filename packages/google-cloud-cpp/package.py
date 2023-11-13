@@ -20,14 +20,12 @@ class GoogleCloudCpp(CMakePackage):
     homepage = "https://github.com/googleapis/google-cloud-cpp/"
     url = "https://github.com/googleapis/google-cloud-cpp/archive/v1.24.0.tar.gz"
 
-    maintainers = [
-        "marcmengel",
-    ]
+    maintainers = [ "marcmengel" ]
 
-    version("1.24.0", sha256="705992bbf5d86a5d5b4276fe249ca495bc0827f1835cb433f3f6be777072aa62")
-    version("1.23.0", sha256="914c9596ee9f271a4ba2de701388009d1f6a7eb0ea269d625aae06be1a51ee9e")
-    version("1.22.0", sha256="2f52dcc679a31e738c01fb68aa0fc966fe0be5322d1a4ec7e6337363281a4704")
-    version("1.21.0", sha256="14bf9bf97431b890e0ae5dca8f8904841d4883b8596a7108a42f5700ae58d711")
+    version( "1.24.0", sha256="705992bbf5d86a5d5b4276fe249ca495bc0827f1835cb433f3f6be777072aa62")
+    version( "1.23.0", sha256="914c9596ee9f271a4ba2de701388009d1f6a7eb0ea269d625aae06be1a51ee9e")
+    version( "1.22.0", sha256="2f52dcc679a31e738c01fb68aa0fc966fe0be5322d1a4ec7e6337363281a4704")
+    version( "1.21.0", sha256="14bf9bf97431b890e0ae5dca8f8904841d4883b8596a7108a42f5700ae58d711")
 
     depends_on("crc32c")
     depends_on("curl")
@@ -51,16 +49,28 @@ class GoogleCloudCpp(CMakePackage):
     def patch(self):
         # this file is missing an include for <thread> ...
         filter_file(
-           r"namespace google \{", 
-           "#include <thread>\nnamespace google {",
-           "google/cloud/bigtable/tests/data_integration_test.cc"
+            r"namespace google \{",
+            "#include <thread>\nnamespace google {",
+            "google/cloud/bigtable/tests/data_integration_test.cc",
         )
-        filter_file(r'#include <vector>', '#include <vector>\n#include <cstdint>', 'google/cloud/iam_bindings.h')
-
+        with (when("@:2.18.0 %gccc@13:")):
+            filter_file(
+                r"#include <vector>",
+                "#include <vector>\n#include <cstdint>",
+                "google/cloud/iam_bindings.h",
+            )
+            filter_file(
+                r"#include <vector>",
+                "#include <vector>\n#include <cstdint>",
+                "google/cloud/storage/iam_policy.h",
+            )
+            filter_file(
+                r"#include <string>",
+                "#include <string>\n#include <cstdint>",
+                "google/cloud/version.h",
+            )
 
     def cmake_args(self):
-        # FIXME: Add arguments other than
-        # FIXME: CMAKE_INSTALL_PREFIX and CMAKE_BUILD_TYPE
-        # FIXME: If not needed delete this function
         args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]
         return args
+
