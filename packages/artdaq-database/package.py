@@ -22,6 +22,7 @@ class ArtdaqDatabase(CMakePackage):
     git = "https://github.com/art-daq/artdaq_database.git"
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v1_09_00", sha256="f16c0ac03bb104ea4882dbfa5e7a6e828becef5b1bdec02269b694c23761fac9")
     version("v1_07_04", sha256="700b63d849b235216e83315958bc83e08b03293425a7011235ee6bf269c73473")
     version("v1_07_03", sha256="670a5d44236091bdb85ca643e27dc59fd263fdb2a7dcbeaa7ec04e2b5f67df40")
     version("v1_07_02", sha256="8cb937967d16f25b59ee8e7104cd968956d892dbe24b29e393c5db982969e432")
@@ -43,7 +44,7 @@ class ArtdaqDatabase(CMakePackage):
     depends_on("curl")
     depends_on("boost+filesystem+program_options")
     depends_on("swig", type="build")
-    depends_on("node-js", type="build")
+    depends_on("node-js", type="build", when="@:v1_07_05")
     depends_on("python", type="build")
 
     depends_on("cetmodules", type="build")

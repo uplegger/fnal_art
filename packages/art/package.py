@@ -24,6 +24,8 @@ class Art(CMakePackage):
     url = "https://github.com/art-framework-suite/art/archive/refs/tags/v3_13_01.tar.gz"
 
 
+    version("3.14.01", sha256="29489e0dc7abf2756c9081569a54dbb49c8cbb472c651e343d6ce2d49fc1cac2")
+    version("3.14.00", sha256="20eaa43d68b07eb5ea87c10c2e1b85a91dc5eaa3b4b83841b67e76dd64399ef0")
     version("3.13.02", sha256="c0a39ef326daee1e77cfb73d56ea08533be0e8d281e9e937814e258622758158")
     version("3.13.01", sha256="bb81d781f2e6e6bd223c9008c8b36b9dc6ed0138e173325f2ef218c798017258")
     version("3.12.00", sha256="d47c6fb30f5b5c93fe8ceea495e245c294bbc8166fcaccbd314d535fe12eb059")

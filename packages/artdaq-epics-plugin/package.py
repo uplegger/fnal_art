@@ -27,6 +27,7 @@ class ArtdaqEpicsPlugin(CMakePackage):
     git = "https://github.com/art-daq/artdaq_epics_plugin.git"
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v1_05_06", sha256="b0e0c203199eb3a826a3560345a8e7f9b5ae2f81941caf7c6fe3730dad0b9d27")
     version("v1_05_04", sha256="b59d8022b00935e4d4fcfcc2a853113c7551473b6f7bdd19ade8e42363062ab8")
     version("v1_05_03", sha256="68937458d87d53ac20607b9e62ac13616c143f3f074675b047897a0b10cf20f0")
     version("v1_05_02", sha256="8a8d12f29a357c2426c16c3aef1a745b6bf3308ede38aae2300584eff582a3cf")

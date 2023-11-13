@@ -21,8 +21,9 @@ class FhiclCpp(CMakePackage):
 
     homepage = "https://art.fnal.gov/"
     git = "https://github.com/art-framework-suite/fhicl-cpp.git"
-    url = "https://github.com/art-framework-suite/fhicl-cpp/archive/refs/tags/v4_18_00.tar.gz"
+    url = "https://github.com/art-framework-suite/fhicl-cpp/archive/refs/tags/v4_18_02.tar.gz"
 
+    version("4.18.02", sha256="ca96ed2f524061b0b9c03aef50d9ef9aad1295d331195e07f7584da7b63ba946")
     version("4.18.01", sha256="ad99cdf48b912fc51852229e04896c04db6db55a7c49f873156dae6665d8bfa7")
     version("4.18.00", sha256="cd5c7c0bef5e235264bf22819db283bd3ebfd512ecab06fb3722142cec0a0a5e")
     version("4.17.00", sha256="07fbba4aed129fcc5edbd9a7304dc3ccd53d2405830779e7c2d71a8b73a99247")

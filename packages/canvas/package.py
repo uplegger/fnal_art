@@ -19,8 +19,9 @@ class Canvas(CMakePackage):
 
     homepage = "https://art.fnal.gov/"
     git = "https://github.com/art-framework-suite/canvas.git"
-    url = "https://github.com/art-framework-suite/canvas/archive/refs/tags/v3_15_01.tar.gz"
+    url = "https://github.com/art-framework-suite/canvas/archive/refs/tags/v3_16_01.tar.gz"
 
+    version("3.16.01", sha256="e8eb606d38dfa8d5c56cf6074212e83cbf55de80c3bff51b1167704d9adb4169")
     version("3.15.02", sha256="7569ce0c2f64f2932b2c6d2e6a734e45d7ca21af652e0192b4f216373870ec24")
     version("3.15.01", sha256="7a2b839f5c564c1a9d719203c4bb68b2feb95019c9e2a92bf30302adbba09047")
     version("3.14.00", sha256="f3dd81aa1770c62e3329409a3849db13c7b7818d4927a52ceb82f5e7f3f0ebf4")
