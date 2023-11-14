@@ -32,8 +32,8 @@ class Larcore(CMakePackage):
     git_base = "https://github.com/LArSoft/larcore.git"
     url = "https://github.com/LArSoft/larcore/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larcore/tags"
-
-    version("09.10.01", sha256="639369a8ff0b6290afe3c42e73f935b14aa8b6951a9819e0a629fab042794501")
+    version("09.10.01", sha256="748ce3a30f81f2dc789be8d276fb0831c951eeef514ff4cae6e2d6ff291fb9fb")
+#    version("09.10.01", sha256="639369a8ff0b6290afe3c42e73f935b14aa8b6951a9819e0a629fab042794501")
     version("09.10.00", sha256="0686862a2cce84f54166934e83345cb5e3b23fe659e435c99ca5e368d6ad46b6")
     version("09.03.02", sha256="16f60e05edd620b6a41928f591fe062db2e9d91cf7948fa4f30d688bd547bcbb")
     version("09.03.01", sha256="bab2aa40e0d796c4f11433ea1096e0b44b1b4d1b09b1c531495ad2b19caf879f")
