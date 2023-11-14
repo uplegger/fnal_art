@@ -37,6 +37,7 @@ class Larexamples(CMakePackage):
     version(
         "09.30.00.rc1", sha256="81b42e8c9886e4199b230a5570922025e6a231c2db8f05fb50e98a03f6862767"
     )
+    version("09.08.10", sha256="4ca06e9aef4df0031de5ee89aee60fa22c9b365f2ac7521124c78d4f353cc37f")
     version("09.08.07", sha256="18c15b664d1c9dcd470d18b80231c84046e8a657c562cde990e45c367bd272c6") # FIX ME
     version("09.08.04", sha256="842ef4901801286c9d86002b81f3cd220cfc4211e43db92a90d508170cb2168f")
     version(

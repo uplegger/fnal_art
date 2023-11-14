@@ -33,6 +33,7 @@ class Larsim(CMakePackage):
     url = "https://github.com/LArSoft/larsim/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larsim/tags"
 
+    version("09.38.06", sha256="be8cc87ea901a5efdcfb91bb9810eee94a0cf860316174ab6ab1cf20c147883b")
     version("09.38.03", sha256="e16fd69ed9acc368563334efbc986d73fb7a085c8201670822d97a314566f52b") # FIX ME
     version("09.38.00", sha256="7f68cacf3cc838f4d5e94f8cc9a59f678fea202694f5c837295d5682e09bd5aa")
     version(

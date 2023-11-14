@@ -33,6 +33,7 @@ class Larana(CMakePackage):
     url = "https://github.com/LArSoft/larana/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larana/tags"
 
+    version("09.14.11", sha256="fbcdf7a2bcef81fb31a10b87b86d8f3af2b1de7dbde192e4a6caf2d2e6fe00bf")
     version("09.14.08", sha256="61fa67c3764f37112af55fff17ab3e573a9ae4b068b3c8e437aca184741d14a3") # FIX ME
     version("09.14.05", sha256="f67962e535fd68e5d3b69fa875edbcf0248a021d161136eaee409fed0e4104a2")
     version(

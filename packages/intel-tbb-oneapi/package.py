@@ -65,3 +65,7 @@ class IntelTbbOneapi(CMakePackage):
         if spec.variants["cxxstd"].value != "default":
             options.append(self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"))
         return options
+
+    def setup_dependent_run_environment(self, env):
+        env.set('TBB_INC', '%s' % self.prefix.include)
+        env.set('TBB_LIB', '%s' % self.prefix.lib)

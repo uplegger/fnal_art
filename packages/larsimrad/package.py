@@ -33,6 +33,7 @@ class Larsimrad(CMakePackage):
     url = "https://github.com/LArSoft/larsimrad/archive/refs/tags/v09_01_17.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larsimrad/tags"
 
+    version("09.08.10", sha256="48be617a621fc1f6ff93a09ce1f8f75199fbc15db103d3aa6627818f59d71b34")
     version("09.08.07", sha256="95a4056e7617911f225581206bc4315044902bd9f679bc40fe61c80c7dafd8f6") # FIX ME
     version("09.08.04", sha256="b20cfda1210fb2b33c6e206f8c0da4a352a4f4bd35a0b8d76e5f19759a7e414a")
     version(

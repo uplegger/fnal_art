@@ -40,6 +40,7 @@ class Lardataobj(CMakePackage):
     version(
         "09.30.00.rc0", sha256="dd765bf9bd5c756563c7c0582a26b1147a582ccdadd55a0933601ea7c125bbd3"
     )
+    version("09.17.01", sha256="1649ec98059ae05d579ce2d330f6e7c439627a1cb74d3a0be8f22d963665b859")
     version("09.16.02", sha256="567a55134c963bcec72c6fc6db6660694dda7bc300a487c58901057d0fb8c293") # FIX ME
     version("09.16.01", sha256="98e2ab76f7c512c863e7491749f97d0a0e829bbc30d521a69deecea48f292728")
     version(

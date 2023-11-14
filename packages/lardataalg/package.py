@@ -40,6 +40,7 @@ class Lardataalg(CMakePackage):
     version(
         "09.30.00.rc0", sha256="42f9c9009b64a3374d1586e5bfb0cfe159da7ef693ac689d6a41519aae069627"
     )
+    version("09.16.04", sha256="014ce4fcb44fdc46e9a778748b13bb6a834bee567abed0be435fb193ce59104f")
     version("09.16.01", sha256="6787452aebec2e0bfb1d1b5e278547bbc23586e616b6c3f74b393d7b2ded44cb") # FIX ME
     version("09.15.01", sha256="dccffa4c0768ee2ae4252bfc4c3947eaedc6881c7ace7548e483e2c74b5a4603")
     version(

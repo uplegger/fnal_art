@@ -43,3 +43,7 @@ class Mu2ePcieUtils(CMakePackage):
     depends_on("cetmodules", type="build")
     depends_on("messagefacility")
     depends_on("trace")
+
+    def setup_dependent_runtime_environment(self, env):
+        env.set('MU2E_PCIE_UTILS_INC', '%s' % self.prefix.include)
+        env.set('MU2E_PCIE_UTILS_LIB', '%s' % self.prefix.lib)

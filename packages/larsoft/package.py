@@ -30,7 +30,7 @@ class Larsoft(CMakePackage):
     git_base = "https://github.com/LArSoft/larsoft.git"
     url = "https://github.com/LArSoft/larsoft/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larsoft/tags"
-
+    version("09.81.00", sha256="0e09c369b03b1189cc38db9d7d2ec6a711a1c8dfb99e2b0badb2726c7826aa5d")
     version("09.78.06", sha256="3733332dcf15189688476558fc617873634e75d110fc816eb82305818a5f6f7b") 
     version("09.78.00", sha256="c02d744cf66b2494316392a105c2ab8a2224ce5e33ae8e4f695054db77f13a12")
     version(

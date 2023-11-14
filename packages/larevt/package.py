@@ -37,6 +37,7 @@ class Larevt(CMakePackage):
     version(
         "09.30.00.rc1", sha256="0bb9897c953a9bb69e2c1bd5be4c8c7586d577b0fb572e6cc1cdc5c0e337637f"
     )
+    version("09.09.07", sha256="e579056bcb7cdfc8ec44cc73fdbd2ef5ab4d30442733b03e97482637687dbc29")
     version("09.09.04", sha256="5c12e59d01b29f93e09fb31b70956792dbc0cc1b956f90ec7687415f30298276") # FIX ME
     version("09.09.01", sha256="a2e44a299d9a962241f1bdb9c77dccd46ef852f005e149a8300bdb56e7030496")
     version("09.03.05", sha256="fc3084ff2441a8358c549a0f23fae39c7b37f977ef29c0c573b2a8aeb9a07cf8")

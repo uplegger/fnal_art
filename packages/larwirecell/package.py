@@ -37,6 +37,7 @@ class Larwirecell(CMakePackage):
     version(
         "09.30.00.rc1", sha256="2d2fdffbda8cb5a16f35b68bc422b6fbebe70af6ac601762f257e4fef0cbf30d"
     )
+    version("09.16.07", sha256="6475f020603f9f2758ef43064ba815cc79d28069b6c25f0d6e36a742335c7425")
     version("09.16.03", sha256="111585550fadeae3d3b8524989a7372e4a99bd96e91e8153301d6ae3f6c73da5") # FIX ME
     version("09.15.00", sha256="b59469c27e62cbb194cc670a057f4708fe7572df92d2deb6679715c533612c40")
     version("09.04.05", sha256="e270deb99f0c2baf96c137d12ed61281ce005f0dfb60fd0d4ee05caf5afcadf3")
