@@ -15,7 +15,7 @@ class H5cpp(Package):
     #url = "https://github.com/steven-varga/h5cpp/archive/refs/tags/v1.10.4-6.tar.gz"
     git = "https://github.com/steven-varga/h5cpp.git"
 
-    version("1.10.4.6", tag="c897956", get_full_repo=True) # from h5cpp-ssi-build
+    version("1.10.4.6", tag="v1.10.4-6")
     version("1.10.4.5", tag="v1.10.4-5")
     #version("1.10.4.6", sha256="4fbc8e777dc78a37ec2fe8c7b6a47114080ffe587f083e83a2046b5e794aef93")
     #version("1.10.4.5", sha256="661ccc4d76e081afc73df71ef11d027837d92dd1089185f3650afcaec9d418ec")
