@@ -34,6 +34,7 @@ class IfdhArt(CMakePackage):
 
 
 
+    version("2.17.01", sha256="40874945c3af876bef9b668e296726ab834bc9bcd6cd11c6ff73fcfc29dd870b")
     version("2.17.00", sha256="d6f10c2516450550f48441f58867456a3dbdccd1c80d6a61bff7095becba3751")
     version("2.16.02", sha256="a39d83228f4c41463ef95bb44abf4f8c857c1c27d91d4e0376f623a99a82ba11")
     version("2.15.06", sha256="a3bf2771c1a3a1cd537128eb1a3a7a4848ea0b97471db8b6d250db192d668a7d")
