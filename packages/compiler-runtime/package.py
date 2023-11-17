@@ -8,7 +8,7 @@ from spack.package import *
 import os
 
 
-class CompolerRuntime(Package):
+class CompilerRuntime(Package):
     """FIXME: Put a proper description of your package here."""
 
     homepage = "https://github.com/FNALssi/"
