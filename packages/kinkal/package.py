@@ -16,6 +16,7 @@ class Kinkal(CMakePackage):
     # maintainers("github_user1", "github_user2")
     maintainers = ['mengel']
 
+    version("2.5.0", sha256="45bfd2fd9b0eea7f78345bf31d280baf6ae17214a3afab97a54bd6c02a332017")
     version("2.4.3", sha256="543b9b3569242f298c7c433ba45945e38a440c4fb410029946318d2e2202ee6e")
     version("2.4.2", sha256="7a9aebf925fb2f354ccd5483078661767db7ced59e826ce234effe0e7bc49aa7")
     version("2.4.1", sha256="ee239f6f9d396d02da6523fb4961f78c55494439775ffcef83aa1362854d2f19")
