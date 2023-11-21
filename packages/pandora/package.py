@@ -115,6 +115,7 @@ class Pandora(CMakePackage):
             "-DLAR_PANDORA_CONTENT=ON",
             "-DINSTALL_DOC=OFF",
             "-DEXAMPLE_PANDORA_CONTENT=OFF",
+            '-DCMAKE_GENERATOR="Unix Makefiles"'
         ]
         return args
 
