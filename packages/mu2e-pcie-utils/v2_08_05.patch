@@ -1,3 +1,30 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4cf1898..28afa4a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -32,7 +32,7 @@ string(TOUPPER ${CMAKE_BUILD_TYPE} BTYPE_UC )
+ 
+ find_package(TRACE 3.17.05 REQUIRED)
+ find_package(messagefacility REQUIRED)
+-
++find_package(Threads REQUIRE)
+ # source
+ add_subdirectory(mu2e_driver)
+ add_subdirectory(mcs)
+diff --git a/dtcInterfaceLib/CMakeLists.txt b/dtcInterfaceLib/CMakeLists.txt
+index 650ad9d..46f9805 100755
+--- a/dtcInterfaceLib/CMakeLists.txt
++++ b/dtcInterfaceLib/CMakeLists.txt
+@@ -11,7 +11,7 @@ cet_make_library(LIBRARY_NAME DTCInterface SOURCE
+ 	    mu2esim.cpp
+         LIBRARIES PUBLIC
+         TRACE::MF
+-        
++        Threads::Threads
+ )
+ 
+ cet_make_exec(NAME mu2eUtil SOURCE util_main.cc Mu2eUtil.cpp LIBRARIES mu2e_pcie_utils::DTCInterface)
+diff --git a/mcs/basic_driver/CMakeLists.txt b/mcs/basic_driver/CMakeLists.txt
 index db92496..0135513 100644
 --- a/mcs/basic_driver/CMakeLists.txt
 +++ b/mcs/basic_driver/CMakeLists.txt
@@ -29,7 +56,7 @@ index 3c54004..0ccbcd3 100644
 +if (EXISTS /lib/modules/${KVERS}/build)
  #get_cmake_property(_variableNames VARIABLES)
  #foreach(_variableName ${_variableNames})
- #      message(STATUS "${_variableName}=${${_variableName}}")
+ #	message(STATUS "${_variableName}=${${_variableName}}")
 @@ -58,6 +60,10 @@ add_custom_command(
  
  add_custom_target(mu2e_driver ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/../drivers/${KVERS}/mu2e.ko)
