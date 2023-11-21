@@ -7,7 +7,7 @@ index 4cf1898..28afa4a 100644
  find_package(TRACE 3.17.05 REQUIRED)
  find_package(messagefacility REQUIRED)
 -
-+find_package(Threads REQUIRE)
++find_package(Threads REQUIRED)
  # source
  add_subdirectory(mu2e_driver)
  add_subdirectory(mcs)
