@@ -64,6 +64,10 @@ class Triton(CMakePackage):
         # external third-party bits (which we aren't building) in the
         # destination, so run an initial make that will fail, and then
         # clean them out
+        make = which("make")
+        if self.spec.variants['generator'].value == 'ninja':
+            make = which("ninja")
+
         with working_dir(self.build_directory):
             try:
                 make("cc-clients")
