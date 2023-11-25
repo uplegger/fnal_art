@@ -72,7 +72,7 @@ class Lardataobj(CMakePackage):
     patch("v09_03_05.patch", when="@09.03.05")
 
     def patch(self):
-        with(when("@:09.81.00 %gcc%13:")):
+        with(when("@:09.81.00 %gcc@13")):
             filter_file(
                 '#include <string>',
                 '#include <cstdint>\n#include<string>',
