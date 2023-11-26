@@ -33,7 +33,7 @@ class Lardata(CMakePackage):
     url = "https://github.com/LArSoft/lardata/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/lardata/tags"
 
-
+    version("09.15.07", sha256="378cf1df2b1192d2a9e704cc5605b136660ec2d22c83afa91baeb80e964b6929")
     version("09.15.04", sha256="1d480660bbd2fe4afcd7e55427531bd11d69a61d3e3814d6965e67df13e47c08") # FIX ME
     version(
         "09.04.vec02",
