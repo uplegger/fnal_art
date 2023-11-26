@@ -77,8 +77,12 @@ class Larsimdnn(CMakePackage):
     depends_on("nug4")
     depends_on("nugen")
     depends_on("nurandom")
+    depends_on("artg4tk")
+    depends_on("larsim")
+    depends_on("ppfx")
     depends_on("cetmodules", type="build")
     depends_on("larfinder", type="build")
+    depends_on("nufinder", type="build")
 
     def cmake_args(self):
         args = [
