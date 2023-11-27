@@ -110,7 +110,7 @@ class Larwirecell(CMakePackage):
             'Modules/FindWireCell.cmake'
         )
         filter_file(
-            r'set(_fwc_fphsa_extra_args'
+            r'set(_fwc_fphsa_extra_args',
             'STRING(REPLACE ";" " " _fwc_missing_deps_str "missing dependencies: ${_fwc_missing_deps}")\n    set(_fwc_fphsa_extra_args',
             'Modules/FindWireCell.cmake'
         filter_file(
