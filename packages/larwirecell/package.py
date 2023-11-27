@@ -90,6 +90,7 @@ class Larwirecell(CMakePackage):
     depends_on("boost")
     depends_on("larevt")
     depends_on("wirecell")
+    depends_on("jsoncpp")
     depends_on("cetmodules", type="build")
 
     def patch(self):
