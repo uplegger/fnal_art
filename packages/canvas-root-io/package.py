@@ -4,14 +4,15 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 import os
+import sys
+
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).parents[2] / "lib"))
+from utilities import *
+
 
 from spack.package import *
-
-
-def sanitize_environments(env, *vars):
-    for var in vars:
-        env.prune_duplicate_paths(var)
-        env.deprioritize_system_paths(var)
 
 
 class CanvasRootIo(CMakePackage):

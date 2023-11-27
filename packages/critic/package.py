@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).parents[2] / "lib"))
-from preset_args import preset_args
+from utilities import *
 
 import llnl.util.tty as tty
 
@@ -29,12 +29,6 @@ class PrependEnv(NameValueModifier):
                 else []
             )
             env[self.name] = self.separator.join(directories)
-
-
-def sanitize_environments(env, *vars):
-    for var in vars:
-        env.prune_duplicate_paths(var)
-        env.deprioritize_system_paths(var)
 
 
 class Critic(CMakePackage):
