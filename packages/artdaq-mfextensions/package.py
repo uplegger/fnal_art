@@ -51,6 +51,11 @@ class ArtdaqMfextensions(CMakePackage):
 
     depends_on("trace+mf")
 
+    with when('@:v1_08_07'):
+        def cmake_args(self):
+            args = [ self.define('IGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES', True) ]
+            return args
+
     def setup_run_environment(self, env):
         prefix = self.prefix
         # Ensure we can find plugin libraries.
