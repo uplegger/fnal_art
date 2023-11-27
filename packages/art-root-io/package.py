@@ -19,7 +19,7 @@ class ArtRootIo(CMakePackage):
 
     homepage = "https://art.fnal.gov/"
     git = "https://github.com/art-framework-suite/art-root-io.git"
-    url = "https://github.com/art-framework-suite/art-root-io/archive/refs/tags/v1_12_02.tar.gz"
+    url = "https://github.com/art-framework-suite/art-root-io/archive/refs/tags/v1_13_01.tar.gz"
 
     version("develop", branch="develop", get_full_repo=True)
     version("1.13.01", sha256="f4a41d448672f0dfa31d3a27787af3af29dd1bf82028d7854652f02d64222366")

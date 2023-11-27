@@ -19,7 +19,7 @@ class CanvasRootIo(CMakePackage):
 
     homepage = "https://art.fnal.gov/"
     git = "https://github.com/art-framework-suite/canvas-root-io.git"
-    url = "https://github.com/art-framework-suite/canvas-root-io/archive/refs/tags/v1_12_01.tar.gz"
+    url = "https://github.com/art-framework-suite/canvas-root-io/archive/refs/tags/v1_13_01.tar.gz"
 
     version("develop", branch="develop", get_full_repo=True)
     version("1.13.01", sha256="44795decae980c7f7a90dde69c886b7f01b150caef7ec8f88622740fdcb87549")
