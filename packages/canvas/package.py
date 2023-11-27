@@ -4,6 +4,12 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 import os
+import sys
+
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).parents[2] / "lib"))
+from preset_args import preset_args
 
 from spack.package import *
 
@@ -40,6 +46,7 @@ class Canvas(CMakePackage):
         sticky=True,
         description="C++ standard",
     )
+    conflicts("cxxstd=17", when="@develop")
 
     depends_on("boost+date_time+test")
     depends_on("cetlib")
@@ -63,9 +70,8 @@ class Canvas(CMakePackage):
         return url.format(version.underscored)
 
     def cmake_args(self):
-        return [
-           "--preset", "default", 
-           self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+        return preset_args(self.stage.source_path) + [
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")
         ]
 
     def setup_build_environment(self, env):
