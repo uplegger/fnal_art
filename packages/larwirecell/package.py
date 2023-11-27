@@ -94,19 +94,28 @@ class Larwirecell(CMakePackage):
     depends_on("cetmodules", type="build")
 
     def patch(self):
-        filter_file( 
-            r'list\(TRANSFORM _fwc_deps APPEND _FOUND', 
+        filter_file(
+            r'list\(TRANSFORM _fwc_deps APPEND _FOUND',
             '',
             'Modules/FindWireCell.cmake'
         )
-        filter_file( 
-            r'OUTPUT_VARIABLE _fwc_fphsa_extra_required_vars\)', 
+        filter_file(
+            r'OUTPUT_VARIABLE _fwc_fphsa_extra_required_vars\)',
             'set(_fwc_fphsa_extra_required_vars "")',
             'Modules/FindWireCell.cmake'
         )
         filter_file(
-            r'Boost::stacktrace_basic', 
-            '', 
+            r'Boost::stacktrace_basic',
+            '',
+            'Modules/FindWireCell.cmake'
+        )
+        filter_file(
+            r'set(_fwc_fphsa_extra_args'
+            'STRING(REPLACE ";" " " _fwc_missing_deps_str "missing dependencies: ${_fwc_missing_deps}")\n    set(_fwc_fphsa_extra_args',
+            'Modules/FindWireCell.cmake'
+        filter_file(
+            r'REASON_FAILURE_MESSAGE "missing dependencies: ${_fwc_missing_deps}"',
+            'REASON_FAILURE_MESSAGE "missing dependencies: ${_fwc_missing_deps_str}"',
             'Modules/FindWireCell.cmake'
         )
         filter_file(
