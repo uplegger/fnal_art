@@ -34,15 +34,11 @@ class Cetmodules(CMakePackage):
 
     depends_on("cmake@3.21:", type="build")
 
-    docs_deps = (
-        "git@2.22:",
-        "py-sphinxcontrib-moderncmakedomain",
-        "py-sphinx-design@0.2.0:",
-        "py-sphinx@5:",
-    )
-    for dep in docs_deps:
-        depends_on(dep, type="build", when="+docs")
-        depends_on(dep, type="build", when="+versioned-docs")
+    with when("+versioned-docs") or when("+docs"):
+        depends_on("git@2.22:", type="build")
+        depends_on("py-sphinxcontrib-moderncmakedomain", type="build")
+        depends_on("py-sphinx-design@0.2.0:", type="build")
+        depends_on("py-sphinx@5:", type="build")
 
     perl_deps = {
         "perl-data-dumper": ("build", "run"),
