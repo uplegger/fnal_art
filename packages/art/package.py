@@ -48,7 +48,7 @@ class Art(CMakePackage):
     conflicts("cxxstd=17", when="@develop")
 
     depends_on("boost+date_time+graph+program_options+regex")
-    depends_on("boost+filesystem+json+test+thread cxxstd=11", type=("build"))
+    depends_on("boost+filesystem+json+test+thread", type=("build"))
     depends_on("boost+graph+test", type=("test"))
     depends_on("canvas")
     depends_on("catch2@2.3.0", type=("build", "test"), when="@:3.11.99")
