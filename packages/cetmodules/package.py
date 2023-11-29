@@ -40,6 +40,10 @@ class Cetmodules(CMakePackage):
         depends_on("py-sphinx-design@0.2.0:", type="build")
         depends_on("py-sphinx@5:", type="build")
 
+    with when("@3.23.00: +versioned-docs"):
+        depends_on("py-sphinx-toolbox", type="build")
+        depends_on("py-sphinxcontrib-jquery", type="build")
+
     perl_deps = {
         "perl-data-dumper": ("build", "run"),
         "perl-json": ("build", "run"),
