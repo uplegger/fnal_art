@@ -55,3 +55,9 @@ class Kinkal(CMakePackage):
     def makelink(self):
         with working_dir(self.stage.path):
             os.symlink('%s/spack-src' % self.stage.path, '%s/KinKal' % self.stage.path)
+
+    @run_after('install')
+    def copy_headers(self):
+        with working_dir(self.stage.path):
+            copy('%s/spack-src/KinKal/General/PhysicalConstants.h' % self.stage.path,
+                    '%s/include/KinKal/General/PhysicalConstants.h' % self.prefix)
