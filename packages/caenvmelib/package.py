@@ -15,6 +15,10 @@ class Caenvmelib(MakefilePackage):
     version("4.0.1", sha256="e3e5d9950fd92a58eca0997ed09f5f14b50a1c6fbbc60d7d71c909ab31fe84d2")
     version("3.4.4", sha256="31273b99eb059d209721a82f20b74986c244a3920188e4156a44caff9e3a7c90")
 
+    def url_for_version(self, version):
+        url = "https://scisoft.fnal.gov/scisoft/reference_tarballs/CAENVMELib-v{0}.tgz"
+        return url.format(version)
+
     depends_on("libusb")
     depends_on("ncurses", when="+sample")
 
