@@ -33,7 +33,6 @@ class Larcoreobj(CMakePackage):
     url = "https://github.com/LArSoft/larcoreobj/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larcoreobj/tags"
 
-
     version(
         "09.30.00.rc1", sha256="01c6095d4123270b5c72cb49edb87d276d6d4955bcbc45b2af209058a2556e44"
     )
@@ -65,12 +64,7 @@ class Larcoreobj(CMakePackage):
         branch="develop",
         get_full_repo=True,
     )
-    version(
-        "09.24.01.01",
-        tag="v09_24_01_01",
-        git="https://github.com/marcmengel/larcoreobj.git",
-        get_full_repo=True,
-    )
+    version("09.24.01.01", tag="v09_24_01_01", git="https://github.com/marcmengel/larcoreobj.git")
     version("develop", branch="develop", get_full_repo=True)
 
     def url_for_version(self, version):
@@ -107,7 +101,7 @@ class Larcoreobj(CMakePackage):
     depends_on("cetmodules", type="build")
 
     def cmake_args(self):
-        args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]
+        args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
         return args
 
     def setup_build_environment(self, spack_env):

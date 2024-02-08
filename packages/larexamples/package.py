@@ -38,7 +38,7 @@ class Larexamples(CMakePackage):
         "09.30.00.rc1", sha256="81b42e8c9886e4199b230a5570922025e6a231c2db8f05fb50e98a03f6862767"
     )
     version("09.08.10", sha256="4ca06e9aef4df0031de5ee89aee60fa22c9b365f2ac7521124c78d4f353cc37f")
-    version("09.08.07", sha256="18c15b664d1c9dcd470d18b80231c84046e8a657c562cde990e45c367bd272c6") # FIX ME
+    version("09.08.07", sha256="18c15b664d1c9dcd470d18b80231c84046e8a657c562cde990e45c367bd272c6")
     version("09.08.04", sha256="842ef4901801286c9d86002b81f3cd220cfc4211e43db92a90d508170cb2168f")
     version(
         "09.02.08.02", sha256="144ffc2e740c7aa73155b3e1f02a4bf0016ac25c9e5092162aefb4fb507ce1c3"
@@ -98,7 +98,7 @@ class Larexamples(CMakePackage):
     depends_on("larsoft-data", type="build")
 
     def cmake_args(self):
-        args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]
+        args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
         return args
 
     def setup_build_environment(self, spack_env):
@@ -112,8 +112,6 @@ class Larexamples(CMakePackage):
             root=False, cover="nodes", order="post", deptype=("link"), direction="children"
         ):
             spack_env.prepend_path("ROOT_INCLUDE_PATH", str(self.spec[d.name].prefix.include))
-        # Perl modules.
-        spack_env.prepend_path("PERL5LIB", os.path.join(self.build_directory, "perllib"))
         # Set path to find fhicl files
         spack_env.prepend_path("FHICL_FILE_PATH", os.path.join(self.build_directory, "job"))
         # Set path to find gdml files
@@ -130,8 +128,6 @@ class Larexamples(CMakePackage):
         ):
             run_env.prepend_path("ROOT_INCLUDE_PATH", str(self.spec[d.name].prefix.include))
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-        # Perl modules.
-        run_env.prepend_path("PERL5LIB", os.path.join(self.prefix, "perllib"))
         # Set path to find fhicl files
         run_env.prepend_path("FHICL_FILE_PATH", os.path.join(self.prefix, "job"))
         # Set path to find gdml files

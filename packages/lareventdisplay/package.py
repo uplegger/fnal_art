@@ -58,7 +58,6 @@ class Lareventdisplay(CMakePackage):
         "mwm1",
         tag="mwm1",
         git="https://github.com/marcmengel/lareventdisplay.git",
-        get_full_repo=True,
     )
     version("develop", branch="develop", get_full_repo=True)
 
@@ -99,7 +98,7 @@ class Lareventdisplay(CMakePackage):
     depends_on("cetmodules", type="build")
 
     def cmake_args(self):
-        args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]
+        args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
         return args
 
     def setup_build_environment(self, spack_env):
@@ -112,8 +111,6 @@ class Lareventdisplay(CMakePackage):
             root=False, cover="nodes", order="post", deptype=("link"), direction="children"
         ):
             spack_env.prepend_path("ROOT_INCLUDE_PATH", str(self.spec[d.name].prefix.include))
-        # Perl modules.
-        spack_env.prepend_path("PERL5LIB", os.path.join(self.build_directory, "perllib"))
         # Set path to find fhicl files
         spack_env.prepend_path("FHICL_INCLUDE_PATH", os.path.join(self.build_directory, "job"))
         # Set path to find gdml files
@@ -130,8 +127,6 @@ class Lareventdisplay(CMakePackage):
         ):
             run_env.prepend_path("ROOT_INCLUDE_PATH", str(self.spec[d.name].prefix.include))
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-        # Perl modules.
-        run_env.prepend_path("PERL5LIB", os.path.join(self.prefix, "perllib"))
         # Set path to find fhicl files
         run_env.prepend_path("FHICL_INCLUDE_PATH", os.path.join(self.prefix, "job"))
         # Set path to find gdml files

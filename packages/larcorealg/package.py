@@ -33,7 +33,6 @@ class Larcorealg(CMakePackage):
     url = "https://github.com/LArSoft/larcorealg/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larcorealg/tags"
 
-
     version(
         "09.30.00.rc1", sha256="6c8be493c1ef8ba349cafefc6304a3c850fef47a87dc593b73662db4da4afc61"
     )
@@ -59,9 +58,7 @@ class Larcorealg(CMakePackage):
     version(
         "09.01.02.02", sha256="f880856eddf4d629af4c4a3009a1ad832d29933beba9f7c093b9a51cd4134c0c"
     )
-    version(
-        "mwm1", tag="mwm1", git="https://github.com/marcmengel/larcorealg.git", get_full_repo=True
-    )
+    version("mwm1", tag="mwm1", git="https://github.com/marcmengel/larcorealg.git")
     version("develop", branch="develop", get_full_repo=True)
 
     def url_for_version(self, version):
@@ -99,7 +96,7 @@ class Larcorealg(CMakePackage):
     depends_on("cetmodules", type="build")
 
     def cmake_args(self):
-        args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]
+        args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
         return args
 
     def setup_build_environment(self, spack_env):
