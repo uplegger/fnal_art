@@ -15,7 +15,7 @@ class Cetmodules(CMakePackage):
 
     homepage = "https://fnalssi.github.io/cetmodules/"
     git = "https://github.com/FNALssi/cetmodules.git"
-    url = "https://github.com/FNALssi/cetmodules/archive/refs/tags/3.21.01.tar.gz"
+    url = "https://github.com/FNALssi/cetmodules/archive/refs/tags/3.24.01.tar.gz"
 
     maintainers = ["chissg", "gartung", "marcmengel", "vitodb"]
 
@@ -26,6 +26,7 @@ class Cetmodules(CMakePackage):
     version("3.21.02", sha256="255d6d6c2455217734b208fc90919b90bc7c0f9a59a4706d329c642bff51f004")
     version("3.22.01", sha256="c72c47328adc0c95f905aae119c76d35513a0677f20163f0ef25a82bd0f72082")
     version("3.22.02", sha256="bbd6a80ab3c495e49b3545230c97ae880755a5f1d39b71d89f07297bf835e5da")
+    version("3.24.01", sha256="6ef8b522b02298a787a318cda898deedc250cdd336dc3168fad934ef607b5916")
 
     variant(
         "versioned-docs", default=False, description="build versioned docs with a landing page"
