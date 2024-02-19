@@ -34,7 +34,9 @@ class Cetmodules(CMakePackage):
     )
     variant("docs", default=False, when="~versioned-docs", description="build documentation")
 
-    depends_on("cmake@3.21:", type="build")
+    depends_on("cmake@3.20:", when="@3.03.00:", type=("build", "run"))
+    depends_on("cmake@3.21:", when="@3.22.02:", type=("build", "run"))
+    depends_on("cmake@3.22:", when="@3.23.00:", type=("build", "run"))
 
     with when("+versioned-docs") or when("+docs"):
         depends_on("git@2.22:", type="build")
