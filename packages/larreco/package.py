@@ -111,16 +111,15 @@ class Larreco(CMakePackage):
     depends_on("marley")
     depends_on("nutools")
     depends_on("py-tensorflow", when="+tf")
-    depends_on("root")
+    depends_on("root+tmva")
     depends_on("rstartree")
     depends_on("tbb")
 
     def cmake_args(self):
         args = [
-            "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-            "-DIGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
-            "-DRStarTree_INCLUDE_DIR={0}".format(self.spec['rstartree'].prefix.include),
-            "-Dlarreco_FW_DIR=fw",
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+            self.define("IGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES", True),
+            self.define("RStarTree_INCLUDE_DIR", self.spec["rstartree"].prefix.include),
         ]
         return args
 

@@ -34,7 +34,7 @@ class Larsimrad(CMakePackage):
     list_url = "https://api.github.com/repos/LArSoft/larsimrad/tags"
 
     version("09.08.10", sha256="48be617a621fc1f6ff93a09ce1f8f75199fbc15db103d3aa6627818f59d71b34")
-    version("09.08.07", sha256="95a4056e7617911f225581206bc4315044902bd9f679bc40fe61c80c7dafd8f6") # FIX ME
+    version("09.08.07", sha256="95a4056e7617911f225581206bc4315044902bd9f679bc40fe61c80c7dafd8f6")
     version("09.08.04", sha256="b20cfda1210fb2b33c6e206f8c0da4a352a4f4bd35a0b8d76e5f19759a7e414a")
     version(
         "09.03.07.02", sha256="c3969b6b7c8c4087d7b539a1778d1ab3456920df131d652b4441d5a83a557b3b"
@@ -93,8 +93,6 @@ class Larsimrad(CMakePackage):
 
     depends_on("cetmodules", type="build")
     depends_on("art-root-io")
-    depends_on("larbatch")
-    depends_on("py-pycurl")
     depends_on("bxdecay0")
     depends_on("lardata")
     depends_on("nugen")
@@ -102,7 +100,7 @@ class Larsimrad(CMakePackage):
     depends_on("nusimdata")
 
     def cmake_args(self):
-        args = ["-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value)]
+        args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
         return args
 
     def setup_build_environment(self, spack_env):

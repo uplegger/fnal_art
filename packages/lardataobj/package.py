@@ -33,7 +33,6 @@ class Lardataobj(CMakePackage):
     url = "https://github.com/LArSoft/lardataobj/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/lardataobj/tags"
 
-
     version(
         "09.30.00.rc1", sha256="3423f7f8d4d27785d4f027e5b5a3d135adfe57f2794f57dd24bb76e4803f2f55"
     )
@@ -41,7 +40,7 @@ class Lardataobj(CMakePackage):
         "09.30.00.rc0", sha256="dd765bf9bd5c756563c7c0582a26b1147a582ccdadd55a0933601ea7c125bbd3"
     )
     version("09.17.01", sha256="1649ec98059ae05d579ce2d330f6e7c439627a1cb74d3a0be8f22d963665b859")
-    version("09.16.02", sha256="567a55134c963bcec72c6fc6db6660694dda7bc300a487c58901057d0fb8c293") # FIX ME
+    version("09.16.02", sha256="567a55134c963bcec72c6fc6db6660694dda7bc300a487c58901057d0fb8c293")
     version("09.16.01", sha256="98e2ab76f7c512c863e7491749f97d0a0e829bbc30d521a69deecea48f292728")
     version(
         "09.11.00.rc0", sha256="62ede62f4cb7ea2821a1427598ed41b44d028011eab5e0b07ec83c2b23e73d37"
@@ -73,16 +72,16 @@ class Lardataobj(CMakePackage):
     patch("v09_03_05.patch", when="@09.03.05")
 
     def patch(self):
-        with(when("@:09.81.00 %gcc@13")):
+        with when("@:09.81.00 %gcc@13"):
             filter_file(
-                '#include <string>',
-                '#include <cstdint>\n#include<string>',
-                'lardataobj/RawData/AuxDetDigit.h',
+                "#include <string>",
+                "#include <cstdint>\n#include<string>",
+                "lardataobj/RawData/AuxDetDigit.h",
             )
             filter_file(
-                '#include <string>',
-                '#include <cstdint>\n#include<string>',
-                'lardataobj/RawData/BeamInfo.h',
+                "#include <string>",
+                "#include <cstdint>\n#include<string>",
+                "lardataobj/RawData/BeamInfo.h",
             )
 
     def url_for_version(self, version):
@@ -111,11 +110,7 @@ class Lardataobj(CMakePackage):
     depends_on("cetmodules", type="build")
 
     def cmake_args(self):
-        args = [
-           "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-           "-Dlardataobj_FW_DIR=fw"
-        ]
-
+        args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
         return args
 
     def setup_build_environment(self, spack_env):

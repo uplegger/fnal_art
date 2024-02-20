@@ -34,7 +34,7 @@ class Lardata(CMakePackage):
     list_url = "https://api.github.com/repos/LArSoft/lardata/tags"
 
     version("09.15.07", sha256="378cf1df2b1192d2a9e704cc5605b136660ec2d22c83afa91baeb80e964b6929")
-    version("09.15.04", sha256="1d480660bbd2fe4afcd7e55427531bd11d69a61d3e3814d6965e67df13e47c08") # FIX ME
+    version("09.15.04", sha256="1d480660bbd2fe4afcd7e55427531bd11d69a61d3e3814d6965e67df13e47c08")
     version(
         "09.04.vec02",
         branch="larvecutils-v09_37_01_01",
@@ -60,7 +60,6 @@ class Lardata(CMakePackage):
         "mwm1", tag="mwm1", git="https://github.com/marcmengel/lardata.git", get_full_repo=True
     )
     version("develop", branch="develop", get_full_repo=True)
-
 
     def url_for_version(self, version):
         url = "https://github.com/LArSoft/{0}/archive/v{1}.tar.gz"
@@ -103,13 +102,14 @@ class Lardata(CMakePackage):
     depends_on("larvecutils", when="@09.04.vec02")
     depends_on("larvecutils", when="@09.10:")  # not quite sure when the dependency came in...
     depends_on("range-v3")
+    depends_on("root+fftw")
     depends_on("fftw")
     depends_on("cetmodules", type="build")
 
     def cmake_args(self):
         args = [
-            "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-            "-DIGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+            self.define("IGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES", True),
         ]
         return args
 

@@ -33,12 +33,11 @@ class Larg4(CMakePackage):
     url = "https://github.com/LArSoft/larg4/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larg4/tags"
 
-
     version(
         "09.30.00.rc1", sha256="d16f63e88177ea7f1c48b4e6fc306ffbb0d6880ac23f411036d78e985eafc8d9"
     )
     version("09.16.07", sha256="79d26dd47873bfea349d485241583743d83b7d0452e6f362a48c44b9d726c90f")
-    version("09.16.04", sha256="8344d183ca35e5c2f50986b4228d7c569269373dca0994beab137ec9c831cdf0") # FIX ME
+    version("09.16.04", sha256="8344d183ca35e5c2f50986b4228d7c569269373dca0994beab137ec9c831cdf0")
     version("09.16.01", sha256="e17520b7074a3d2ab064c40ef654a694d04770741d2c406e336fa7b5ae987f30")
     version(
         "09.06.02.01", sha256="bf7cc46e222dc095bd9b980bc1987236e6e35dd4d0453c8258705ba02facbc9f"
@@ -90,7 +89,6 @@ class Larg4(CMakePackage):
 
     depends_on("clhep")
     depends_on("artg4tk")
-    depends_on("larevt")
     depends_on("art")
     depends_on("canvas-root-io")
     depends_on("art-root-io")
@@ -100,10 +98,7 @@ class Larg4(CMakePackage):
     depends_on("cetmodules", type="build")
 
     def cmake_args(self):
-        args = [
-            "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-            "-Dlarg4_FW_DIR=fw",
-        ]
+        args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
         return args
 
     def flag_handler(self, name, flags):
