@@ -34,7 +34,7 @@ class Larsim(CMakePackage):
     list_url = "https://api.github.com/repos/LArSoft/larsim/tags"
 
     version("09.38.06", sha256="be8cc87ea901a5efdcfb91bb9810eee94a0cf860316174ab6ab1cf20c147883b")
-    version("09.38.03", sha256="e16fd69ed9acc368563334efbc986d73fb7a085c8201670822d97a314566f52b") # FIX ME
+    version("09.38.03", sha256="e16fd69ed9acc368563334efbc986d73fb7a085c8201670822d97a314566f52b")
     version("09.38.00", sha256="7f68cacf3cc838f4d5e94f8cc9a59f678fea202694f5c837295d5682e09bd5aa")
     version(
         "09.30.00.rc1", sha256="8371ab32c43b702337d7022fee255eb2a86164a7ee8edc91781f4b0494890142"
@@ -108,24 +108,28 @@ class Larsim(CMakePackage):
     depends_on("cetmodules", type="build")
 
     def patch(self):
-        filter_file(r'find_package\(nug4 ', 'find_package(nufinder)\nfind_package(nug4 ', 'CMakeLists.txt')
-        filter_file(r'math_tr1', '', 'CMakeLists.txt')
-        filter_file(r'Boost::math_tr1', '', 'larsim/LegacyLArG4/CMakeLists.txt')
-        filter_file(r'Boost::math_tr1', '', 'larsim/PhotonPropagation/CMakeLists.txt')
-
+        filter_file(
+            r"find_package\(nug4 ", "find_package(nufinder)\nfind_package(nug4 ", "CMakeLists.txt"
+        )
+        filter_file(r"math_tr1", "", "CMakeLists.txt")
+        filter_file(r"Boost::math_tr1", "", "larsim/LegacyLArG4/CMakeLists.txt")
+        filter_file(r"Boost::math_tr1", "", "larsim/PhotonPropagation/CMakeLists.txt")
 
     def cmake_args(self):
         args = [
-            "-DCMAKE_CXX_STANDARD={0}".format(self.spec.variants["cxxstd"].value),
-            "-DIFDH_INC={0}".format(self.spec["ifdhc"].prefix.include),
-            "-DIFDH_LIB={0}".format(self.spec["ifdhc"].prefix),
-            "-DGENIE_INC={0}".format(self.spec["genie"].prefix.include),
-            "-DGENIE_VERSION=v{0}".format(self.spec["genie"].version.underscored),
-            "-DLARSOFT_DATA_DIR=v{0}".format(self.spec["larsoft-data"].prefix),
-            "-DLARSOFT_DATA_VERSION=v{0}".format(self.spec["larsoft-data"].version.underscored),
-            "-DIGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES=1",
-            "-Dlarsim_MODULE_PLUGINS=FALSE",
-            "-Dlarsim_FW_DIR=fw",
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+            self.define("IFDH_INC", self.spec["ifdhc"].prefix.include),
+            self.define("IFDH_LIB", self.spec["ifdhc"].prefix),
+            self.define("GENIE_INC", self.spec["genie"].prefix.include),
+            self.define("GENIE_VERSION", "v" + self.spec["genie"].version.underscored),
+            self.define("LARSOFT_DATA_DIR", "v" + self.spec["larsoft-data"].prefix),
+            self.define(
+                "LARSOFT_DATA_VERSION", "v" + self.spec["larsoft-data"].version.underscored
+            ),
+            self.define("IGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES", True),
+            # The following lines should be removed once the larsim/CMakePresets.json file is fixed
+            self.define("larsim_MODULE_PLUGINS", False),
+            self.define("larsim_FW_DIR", "fw"),
         ]
         return args
 
