@@ -123,6 +123,7 @@ class CanvasRootIo(CMakePackage):
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Set LD_LIBRARY_PATH so CheckClassVersion.py can find cppyy lib
         env.prepend_path("LD_LIBRARY_PATH", join_path(self.spec["root"].prefix.lib))
+        env.prepend_path("LD_LIBRARY_PATH", join_path(self.spec["root"].prefix.lib,"root"))
         # Ensure Root can find headers for autoparsing.
         for d in dependent_spec.traverse(
             root=False, cover="nodes", order="post", deptype=("link"), direction="children"
