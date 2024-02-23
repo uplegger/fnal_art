@@ -11,11 +11,11 @@
 # next to all the things you'll want to change. Once you've handled
 # them, you can save this file and test your package like this:
 #
-#     spack install systematicstools
+#     spack install nusystematics
 #
 # You can edit this file again by typing:
 #
-#     spack edit systematicstools
+#     spack edit nusystematics
 #
 # See the Spack documentation for more information on packaging.
 # ----------------------------------------------------------------------------
@@ -23,12 +23,12 @@
 from spack.package import *
 
 
-class Systematicstools(CMakePackage):
+class Nusystematics(CMakePackage):
     """FIXME: Put a proper description of your package here."""
 
     # FIXME: Add a proper url for your package's homepage here.
     homepage = "https://www.example.com"
-    url = "https://github.com/LArSoft/systematicstools/archive/refs/tags/v01_04_02.tar.gz"
+    url = "https://github.com/LArSoft/nusystematics/archive/refs/tags/v01_03_12.tar.gz"
 
     # FIXME: Add a list of GitHub accounts to
     # notify when the package is updated.
@@ -38,10 +38,11 @@ class Systematicstools(CMakePackage):
     # See https://spdx.org/licenses/ for a list.
     license("UNKNOWN")
 
-    version("01_04_02", sha256="0e14b9736b31b7911307e8703d0f386f2a1fb5c1dcaa69a8d7ce9916afb974cd")
+    version("01_03_12", sha256="53300aa8bc604d06858a8a01f3ca6e59526d524375f24d6ae728f6d21e027898")
 
     # FIXME: Add dependencies if required.
-    depends_on("art-root-io")
+    depends_on("nugen")
+    depends_on("systematicstools")
     depends_on("cetmodules", type="build")
     depends_on("cmake", type="build")
 
