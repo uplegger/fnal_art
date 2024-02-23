@@ -40,15 +40,12 @@ class Nusystematics(CMakePackage):
 
     version("01_03_12", sha256="53300aa8bc604d06858a8a01f3ca6e59526d524375f24d6ae728f6d21e027898")
 
-    # FIXME: Add dependencies if required.
     depends_on("nugen")
     depends_on("systematicstools")
+    depends_on("nufinder")
     depends_on("cetmodules", type="build")
     depends_on("cmake", type="build")
 
     def cmake_args(self):
-        # FIXME: Add arguments other than
-        # FIXME: CMAKE_INSTALL_PREFIX and CMAKE_BUILD_TYPE
-        # FIXME: If not needed delete this function
         args = []
         return args
