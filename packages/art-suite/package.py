@@ -50,10 +50,10 @@ class ArtSuite(BundlePackage):
         depends_on("py-numpy@1.24.3")
         depends_on("openblas@0.3.23")
         depends_on("postgresql@15.2") # 15.3 not published to Spack
-        depends_on("py-pybind11@2.10.4") 
+        depends_on("py-pybind11@2.10.4")
         depends_on("pythia6@6.4.28")
         depends_on("python@3.9.15")
-        depends_on("range-v3@0.12.0") 
+        depends_on("range-v3@0.12.0")
         depends_on("root@6.28.10", when="+root")
         depends_on("sqlite@3.40.1")
         depends_on("tbb@2021.9.0")
