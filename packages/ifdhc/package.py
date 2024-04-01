@@ -17,6 +17,7 @@ class Ifdhc(MakefilePackage):
     git_base = "https://cdcvs.fnal.gov/projects/ifdhc/ifdhc.git"
     url = "https://cdcvs.fnal.gov/cgi-bin/git_archive.cgi/cvs/projects/ifdhc.v2_5_2.tbz2"
 
+    version("2.7", sha256="49c3e9fbc5a1ebb80d8fb870e45ec9faa6577c001a8a073521b071d51dd93bb8")
     version("2.6.20", sha256="54cffb88be5c085dd2f3246507cf850299b780e2ab16cd8abce4360e200b4044")
     version("2.6.19", sha256="5499391378d6769da0b94b0e8eaea358d6c7be40673e4c97c5580c4e94bdaa24")
     version("2.6.11", sha256="988eb6bd2124174e0956b4415edcc3671ac87896a64852e9e99d8628c4fa1334")
@@ -113,6 +114,7 @@ class Ifdhc(MakefilePackage):
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("PATH", self.spec.prefix.bin)
+        run_env.prepend_path("PYTHONPATH", self.spec.prefix.lib.python)
         run_env.set("IFDHC_DIR", self.spec.prefix)
         # bump ifdhc-config ahead of us in case of updated scripts
         run_env.prepend_path("PATH", self.spec['ifdhc-config'].prefix.bin)
@@ -127,6 +129,7 @@ class Ifdhc(MakefilePackage):
 
     def setup_dependent_run_environment(self, run_env, dspec):
         run_env.prepend_path("PATH", self.prefix.bin)
+        run_env.prepend_path("PYTHONPATH", self.spec.prefix.lib.python)
         # Non-standard, therefore we have to do it ourselves.
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.spec.prefix.inc)
         run_env.set("IFDHC_DIR", self.spec.prefix)
