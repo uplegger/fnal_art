@@ -52,7 +52,7 @@ class Canvas(CMakePackage):
     depends_on("cmake@3.21:", type="build")
     depends_on("fhicl-cpp")
     depends_on("catch2", type=("build", "test"))
-    depends_on("hep-concurrency", type="test")
+    depends_on("hep-concurrency", type=("build", "test"))
     depends_on("messagefacility")
     depends_on("range-v3@0.11:")
 
