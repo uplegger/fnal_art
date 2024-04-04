@@ -56,6 +56,8 @@ class Cetlib(CMakePackage):
     depends_on("catch2@2.3.0:2", when="@:3.16", type=("build", "test"))
     depends_on("cetmodules", type="build")
     conflicts("cetmodules@:3.21.00", when="catch2@3:")
+    # TBB is an indirect dependency (from hep-concurrency) required
+    # explicitly for unknown reasons.
     depends_on("tbb")
 
     if "SPACK_CMAKE_GENERATOR" in os.environ:
