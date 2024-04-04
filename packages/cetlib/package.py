@@ -58,7 +58,7 @@ class Cetlib(CMakePackage):
     conflicts("cetmodules@:3.21.00", when="catch2@3:")
     # TBB is an indirect dependency (from hep-concurrency) required
     # explicitly for unknown reasons.
-    depends_on("tbb")
+    depends_on("tbb", type=("build", "test"))
 
     if "SPACK_CMAKE_GENERATOR" in os.environ:
         generator = os.environ["SPACK_CMAKE_GENERATOR"]
