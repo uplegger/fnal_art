@@ -114,3 +114,9 @@ class Larpandoracontent(CMakePackage):
 
     def setup_build_environment(self, env):
         env.set("CETBUILDTOOLS_VERSION", "cetmodules")
+
+    def setup_run_environment(self, run_env):
+        run_env.prepend_path("PATH", self.prefix.bin)
+        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
+        run_env.append_path("CET_PLUGIN_PATH", self.prefix.lib)
+

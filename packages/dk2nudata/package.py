@@ -55,6 +55,6 @@ class Dk2nudata(CMakePackage):
         spack_env.set("DK2NUDATA_LIB", self.prefix.lib)
         spack_env.set("DK2NUDATA_INC", self.prefix.include)
 
-    def setup_dependent_run_environment(self, run_env, dspec):
+    def setup_run_environment(self, run_env):
         # Ensure we can find plugin libraries.
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)

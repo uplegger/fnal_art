@@ -43,7 +43,7 @@ class Marley(Package):
         args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
         return args
 
-    def setup_run_environment(self, spack_env):
+    def setup_build_environment(self, spack_env):
         spack_env.append_flags("CPPFLAGS", "-I../include")
         cxxstd_flag = "cxx{0}_flag".format(self.spec.variants["cxxstd"].value)
         spack_env.append_flags("CXXFLAGS", getattr(self.compiler, cxxstd_flag))
@@ -51,3 +51,10 @@ class Marley(Package):
     def install(self, spec, prefix):
         with working_dir("build"):
             make("prefix={0}".format(prefix), "install")
+
+    def setup_run_environment(self, run_env):
+        run_env.prepend_path("PATH", self.prefix.bin)
+        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
+        run_env.append_path("FW_SEARCH_PATH", self.prefix.share.data)
+        run_env.append_path("FW_SEARCH_PATH", self.prefix.share.data.react)
+        run_env.append_path("FW_SEARCH_PATH", self.prefix.share.data.structure)
