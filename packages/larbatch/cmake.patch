@@ -7,7 +7,7 @@
 +CMAKE_MINIMUM_REQUIRED (VERSION 3.19)
 -CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
  
-+project(larbatch VERSION 5.15.51)
++project(larbatch VERSION 1.15.51)
 -project(larbatch NONE)
  
 +find_package(cetbuildtools)
