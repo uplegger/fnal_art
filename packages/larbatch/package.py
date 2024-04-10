@@ -26,6 +26,15 @@ class Larbatch(CMakePackage):
 
     patch("cmake.patch") 
 
+    @run_before("cmake")
+    def patch_version(self):
+        print("filtering version in CMakeLists.txt")
+        filter_file(
+            r"project\(larbatch .*\)",
+            "project(larbatch VERSION {})".format(self.spec.version),
+            "CMakeLists.txt"
+        )
+
     def cmake_args(self):
         args = [
         ]
@@ -33,4 +42,5 @@ class Larbatch(CMakePackage):
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("PATH", self.prefix.bin)
+        run_env.prepend_path("PYTHONPATH", self.prefix.bin)
         run_env.prepend_path("PYTHONPATH", str(self.prefix.larbatch.v) + str(self.spec.version.underscored) + "/python")
