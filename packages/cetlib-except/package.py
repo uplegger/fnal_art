@@ -62,6 +62,3 @@ class CetlibExcept(CMakePackage):
         # Cleanup.
         sanitize_environments(env, "PATH")
 
-    def setup_run_environment(self, run_env):
-        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-        run_env.append_path("CET_PLUGIN_PATH", self.prefix.lib)

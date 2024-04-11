@@ -79,8 +79,6 @@ class FhiclCpp(CMakePackage):
 
     def setup_run_environment(self, env):
         env.prepend_path("PATH", self.prefix.bin)
-        env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-        env.append_path("CET_PLUGIN_PATH", self.prefix.lib)
         # Bash completions.
         bindir = self.prefix.bin
         env.from_sourcing_file(os.path.join(bindir, "fhicl-dump_completions"))
