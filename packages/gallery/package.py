@@ -77,3 +77,6 @@ class Gallery(CMakePackage):
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Cleaup.
         sanitize_environments(env, "CET_PLUGIN_PATH")
+
+    def setup_run_environment(self, run_env):
+        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)

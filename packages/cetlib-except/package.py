@@ -62,3 +62,4 @@ class CetlibExcept(CMakePackage):
         env.prepend_path("PATH", os.path.join(self.build_directory, "bin"))
         # Cleanup.
         sanitize_environments(env, "PATH")
+

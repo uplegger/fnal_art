@@ -71,3 +71,4 @@ class HepConcurrency(CMakePackage):
         env.prepend_path("PATH", os.path.join(prefix, "bin"))
         # Cleanup.
         sanitize_environments(env, "PATH")
+

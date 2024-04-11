@@ -98,7 +98,11 @@ class Larana(CMakePackage):
         spack_env.prepend_path("CET_PLUGIN_PATH", os.path.join(self.build_directory, "lib"))
         # Ensure Root can find headers for autoparsing.
         for d in self.spec.traverse(
-            root=False, cover="nodes", order="post", deptype=("link"), direction="children"
+            root=False,
+            cover="nodes",
+            order="post",
+            deptype=("link"),
+            direction="children",
         ):
             spack_env.prepend_path("ROOT_INCLUDE_PATH", str(self.spec[d.name].prefix.include))
         # Perl modules.
@@ -107,16 +111,23 @@ class Larana(CMakePackage):
         sanitize_environments(spack_env)
 
     def setup_run_environment(self, run_env):
+        run_env.prepend_path("PATH", self.prefix.bin)
         # Ensure we can find plugin libraries.
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
         # Ensure Root can find headers for autoparsing.
         for d in self.spec.traverse(
-            root=False, cover="nodes", order="post", deptype=("link"), direction="children"
+            root=False,
+            cover="nodes",
+            order="post",
+            deptype=("link"),
+            direction="children",
         ):
             run_env.prepend_path("ROOT_INCLUDE_PATH", str(self.spec[d.name].prefix.include))
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
         # Perl modules.
         run_env.prepend_path("PERL5LIB", os.path.join(self.prefix, "perllib"))
+        run_env.append_path("FHICL_FILE_PATH", "{0}/fcl".format(self.prefix))
+        run_env.append_path("FW_SEARCH_PATH", "{0}/gdml".format(self.prefix))
         # Cleaup.
         sanitize_environments(run_env)
 
@@ -129,14 +140,6 @@ class Larana(CMakePackage):
         spack_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
         spack_env.append_path("FHICL_FILE_PATH", "{0}/fcl".format(self.prefix))
         spack_env.append_path("FW_SEARCH_PATH", "{0}/gdml".format(self.prefix))
-
-    def setup_dependent_run_environment(self, run_env, dspec):
-        # Ensure we can find plugin libraries.
-        run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
-        run_env.prepend_path("PATH", self.prefix.bin)
-        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-        run_env.append_path("FHICL_FILE_PATH", "{0}/fcl".format(self.prefix))
-        run_env.append_path("FW_SEARCH_PATH", "{0}/gdml".format(self.prefix))
 
     def flag_handler(self, name, flags):
         if name == "cxxflags" and self.spec.compiler.name == "gcc":

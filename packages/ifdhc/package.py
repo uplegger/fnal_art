@@ -116,9 +116,8 @@ class Ifdhc(MakefilePackage):
         run_env.prepend_path("PATH", self.spec.prefix.bin)
         run_env.prepend_path("PYTHONPATH", self.spec.prefix.lib.python)
         run_env.set("IFDHC_DIR", self.spec.prefix)
-        # bump ifdhc-config ahead of us in case of updated scripts
-        run_env.prepend_path("PATH", self.spec['ifdhc-config'].prefix.bin)
-        run_env.prune_duplicate_paths("PATH")
+        # put ifdhc_config bin path ahead of us that we saved in os.environ...
+        run_env.prepend_path("PATH", os.environ["IFDHC_CONFIG_BIN"])
 
     def setup_dependent_build_environment(self, spack_env, dspec):
         spack_env.prepend_path("PATH", self.spec.prefix.bin)
@@ -126,10 +125,3 @@ class Ifdhc(MakefilePackage):
         spack_env.prepend_path("ROOT_INCLUDE_PATH", self.spec.prefix.inc)
         spack_env.set("IFDHC_DIR", self.spec.prefix)
         spack_env.set("IFDHC_INC", self.spec.prefix.inc)
-
-    def setup_dependent_run_environment(self, run_env, dspec):
-        run_env.prepend_path("PATH", self.prefix.bin)
-        run_env.prepend_path("PYTHONPATH", self.spec.prefix.lib.python)
-        # Non-standard, therefore we have to do it ourselves.
-        run_env.prepend_path("ROOT_INCLUDE_PATH", self.spec.prefix.inc)
-        run_env.set("IFDHC_DIR", self.spec.prefix)
