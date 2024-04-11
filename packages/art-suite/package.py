@@ -29,7 +29,7 @@ class ArtSuite(BundlePackage):
     variant("root", default=True, description="Also bring in the ROOT IO packages")
 
     with when("@s130"):
-        depends_on("cmake@master")
+        depends_on("cmake@3.27.9")
 
         depends_on("art@3.14.04 cxxstd=20")
         depends_on("art-root-io@1.13.05 cxxstd=20", when="+root")
@@ -59,7 +59,7 @@ class ArtSuite(BundlePackage):
         depends_on("tbb@2021.9.0")
         depends_on("xrootd@5.5.5")
     with when("@s128"):
-        depends_on("cmake@master")
+        depends_on("cmake@3.27.9")
 
         depends_on("art@3.14.03 cxxstd=20")
         depends_on("art-root-io@1.13.03 cxxstd=20", when="+root")
@@ -89,7 +89,7 @@ class ArtSuite(BundlePackage):
         depends_on("tbb@2021.9.0")
         depends_on("xrootd@5.5.5")
     with when("@s126"):
-        depends_on("cmake@master")
+        depends_on("cmake@3.27.9")
 
         depends_on("art@3.14.01 cxxstd=20")
         depends_on("art-root-io@1.13.01 cxxstd=20", when="+root")
@@ -119,7 +119,7 @@ class ArtSuite(BundlePackage):
         depends_on("tbb@2021.9.0")
         depends_on("xrootd@5.5.5")
     with when("@s124"):
-        depends_on("cmake@master")
+        depends_on("cmake@3.27.9")
 
         depends_on("art@3.13.02 cxxstd=17")
         depends_on("art-root-io@1.12.03 cxxstd=17", when="+root")
@@ -149,7 +149,7 @@ class ArtSuite(BundlePackage):
         depends_on("tbb@2021.8.0 cxxstd=17")
         depends_on("xrootd@5.5.3 cxxstd=17")
     with when("@s123"):
-        depends_on("cmake@master")
+        depends_on("cmake@3.27.9")
 
         depends_on("art@3.13.01 cxxstd=17")
         depends_on("art-root-io@1.12.03 cxxstd=17", when="+root")
