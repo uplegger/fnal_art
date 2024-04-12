@@ -11,11 +11,11 @@ class Larbatch(CMakePackage):
     homepage = "https://cdcvs.fnal.gov/redmine/projects/larbatch-web-client/wiki"
     url = "https://github.com/LArSoft/larbatch/archive/refs/tags/v01_51_15.tar.gz"
 
+    version("01.59.04", sha256="8158d2e1b5f208d1014b3745c347d49e3e3449c240842af5361c67fd3b269dff")
     version("1.51.15", sha256="adc956e621f36c7fbf37f85c737e793d8fc8e58ad44ec3077ea80830f1b7ad25")
 
     depends_on("sam-web-client", type=("run"))
     depends_on("python", type=("run"))
-    depends_on("cetbuildtools", type="build") 
     depends_on("cetmodules", type="build") 
 
     def url_for_version(self, version):
@@ -24,7 +24,7 @@ class Larbatch(CMakePackage):
 
     version("1.51.15", sha256="adc956e621f36c7fbf37f85c737e793d8fc8e58ad44ec3077ea80830f1b7ad25")
 
-    patch("cmake.patch") 
+    patch("cmake.patch" , when=("@:1.57.00")) 
 
     @run_before("cmake")
     def patch_version(self):
@@ -43,4 +43,5 @@ class Larbatch(CMakePackage):
     def setup_run_environment(self, run_env):
         run_env.prepend_path("PATH", self.prefix.bin)
         run_env.prepend_path("PYTHONPATH", self.prefix.bin)
+        run_env.prepend_path("PYTHONPATH", self.prefix.python)
         run_env.prepend_path("PYTHONPATH", str(self.prefix.larbatch.v) + str(self.spec.version.underscored) + "/python")
