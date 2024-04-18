@@ -4,16 +4,11 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 import os
-import sys
-
-from pathlib import Path
-
-sys.path.append(str(Path(__file__).parents[2] / "lib"))
-from utilities import *
 
 import llnl.util.tty as tty
 
 from spack.package import *
+from spack.pkg.fnal_art.utilities import *
 from spack.util.environment import NameValueModifier
 
 
@@ -89,9 +84,9 @@ class Critic(CMakePackage):
     def setup_build_environment(self, env):
         prefix = self.build_directory
         # Binaries.
-        env.prepend_path("PATH", os.path.join(prefix, "bin"))
+        env.prepend_path("PATH", prefix.bin)
         # Ensure we can find plugin libraries.
-        env.prepend_path("CET_PLUGIN_PATH", os.path.join(prefix, "lib"))
+        env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # ... and in the interpreter.
         env.env_modifications.append(PrependEnv("LD_LIBRARY_PATH", "CET_PLUGIN_PATH"))
         # Cleanup.

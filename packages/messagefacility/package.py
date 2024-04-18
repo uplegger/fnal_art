@@ -5,14 +5,9 @@
 
 
 import os
-import sys
-
-from pathlib import Path
-
-sys.path.append(str(Path(__file__).parents[2] / "lib"))
-from utilities import *
 
 from spack.package import *
+from spack.pkg.fnal_art.utilities import *
 
 
 class Messagefacility(CMakePackage):
@@ -79,21 +74,20 @@ class Messagefacility(CMakePackage):
     def setup_build_environment(self, env):
         prefix = self.build_directory
         # Binaries.
-        env.prepend_path("PATH", os.path.join(prefix, "bin"))
+        env.prepend_path("PATH", prefix.bin)
         # Ensure we can find plugin libraries.
-        env.prepend_path("CET_PLUGIN_PATH", os.path.join(prefix, "lib"))
+        env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Perl modules.
-        env.prepend_path("PERL5LIB", os.path.join(prefix, "perllib"))
+        env.prepend_path("PERL5LIB", prefix.perllib)
         # Cleaup.
         sanitize_environments(env, "PATH", "CET_PLUGIN_PATH", "PERL5LIB")
 
     def setup_run_environment(self, env):
         prefix = self.prefix
-        env.prepend_path("PATH", prefix.bin)
         # Ensure we can find plugin libraries.
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Perl modules.
-        env.prepend_path("PERL5LIB", os.path.join(prefix, "perllib"))
+        env.prepend_path("PERL5LIB", prefix.perllib)
         # Cleaup.
         sanitize_environments(env, "CET_PLUGIN_PATH", "PERL5LIB")
 
@@ -102,6 +96,6 @@ class Messagefacility(CMakePackage):
         # Ensure we can find plugin libraries.
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Perl modules.
-        env.prepend_path("PERL5LIB", os.path.join(prefix, "perllib"))
+        env.prepend_path("PERL5LIB", prefix.perllib)
         # Cleaup.
         sanitize_environments(env, "CET_PLUGIN_PATH", "PERL5LIB")

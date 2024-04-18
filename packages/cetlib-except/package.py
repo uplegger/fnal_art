@@ -4,14 +4,9 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 import os
-import sys
-
-from pathlib import Path
-
-sys.path.append(str(Path(__file__).parents[2] / "lib"))
-from utilities import *
 
 from spack.package import *
+from spack.pkg.fnal_art.utilities import *
 
 
 class CetlibExcept(CMakePackage):
@@ -59,7 +54,6 @@ class CetlibExcept(CMakePackage):
 
     def setup_build_environment(self, env):
         # For tests.
-        env.prepend_path("PATH", os.path.join(self.build_directory, "bin"))
+        env.prepend_path("PATH", self.build_directory.bin)
         # Cleanup.
         sanitize_environments(env, "PATH")
-

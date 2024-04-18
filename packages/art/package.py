@@ -4,13 +4,9 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 import os
-import sys
-from pathlib import Path
-
-sys.path.append(str(Path(__file__).parents[2] / "lib"))
-from utilities import *
 
 from spack import *
+from spack.pkg.fnal_art.utilities import *
 
 
 class Art(CMakePackage):
@@ -85,11 +81,11 @@ class Art(CMakePackage):
     def setup_build_environment(self, env):
         prefix = self.build_directory
         # Binaries.
-        env.prepend_path("PATH", os.path.join(prefix, "bin"))
+        env.prepend_path("PATH", prefix.bin)
         # Ensure we can find plugin libraries.
-        env.prepend_path("CET_PLUGIN_PATH", os.path.join(prefix, "lib"))
+        env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Perl modules.
-        env.prepend_path("PERL5LIB", os.path.join(prefix, "perllib"))
+        env.prepend_path("PERL5LIB", prefix.perllib)
         # Cleaup.
         sanitize_environments(env, "PATH", "CET_PLUGIN_PATH", "PERL5LIB")
 
@@ -98,7 +94,7 @@ class Art(CMakePackage):
         # Ensure we can find plugin libraries.
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Perl modules.
-        env.prepend_path("PERL5LIB", os.path.join(prefix, "perllib"))
+        env.prepend_path("PERL5LIB", prefix.perllib)
         # Cleaup.
         sanitize_environments(env, "CET_PLUGIN_PATH", "PERL5LIB")
 
@@ -107,4 +103,4 @@ class Art(CMakePackage):
         # Ensure we can find plugin libraries.
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Perl modules.
-        env.prepend_path("PERL5LIB", os.path.join(prefix, "perllib"))
+        env.prepend_path("PERL5LIB", prefix.perllib)
