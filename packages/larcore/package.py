@@ -33,6 +33,9 @@ class Larcore(CMakePackage):
     url = "https://github.com/LArSoft/larcore/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larcore/tags"
 
+    version("10.00.00rc1", sha256="a47964d1fcdd3067da42a93e8198d5cceb1196adb7974898ebc231b34b1bd5bc")
+    version("09.11.01", sha256="2cc3cc0e90f5f4c49d3d3f8cf29d26b21686b34d88d31a9f553df5cff5d4e118")
+
     version("09.10.01", sha256="748ce3a30f81f2dc789be8d276fb0831c951eeef514ff4cae6e2d6ff291fb9fb")
     version("09.10.00", sha256="0686862a2cce84f54166934e83345cb5e3b23fe659e435c99ca5e368d6ad46b6")
     version("09.03.02", sha256="16f60e05edd620b6a41928f591fe062db2e9d91cf7948fa4f30d688bd547bcbb")
@@ -56,7 +59,7 @@ class Larcore(CMakePackage):
     version("develop", branch="develop", get_full_repo=True)
 
     def url_for_version(self, version):
-        url = "https://github.com/LArSoft/{0}/archive/v{1}.tar.gz"
+        url = "https://github.com/LArSoft/{0}/archive/refs/tags/v{1}.tar.gz"
         return url.format(self.name, version.underscored)
 
     def fetch_remote_versions(self, concurrency=None):
@@ -90,6 +93,7 @@ class Larcore(CMakePackage):
     depends_on("larcorealg")
     depends_on("art-root-io")
     depends_on("cetmodules", type="build")
+    depends_on("cetbuildtools", type="build" , when="@:09.11")
 
     def cmake_args(self):
         args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
