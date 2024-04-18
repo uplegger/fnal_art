@@ -4,14 +4,9 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 import os
-import sys
-
-from pathlib import Path
-
-sys.path.append(str(Path(__file__).parents[2] / "lib"))
-from utilities import *
 
 from spack.package import *
+from spack.pkg.fnal_art.utilities import *
 
 
 class FhiclCpp(CMakePackage):
@@ -71,14 +66,12 @@ class FhiclCpp(CMakePackage):
         ]
 
     def setup_build_environment(self, env):
-        prefix = self.build_directory
         # Path for tests.
-        env.prepend_path("PATH", os.path.join(prefix, "bin"))
+        env.prepend_path("PATH", self.build_directory.bin)
         # Cleanup
         sanitize_environments(env, "PATH")
 
     def setup_run_environment(self, env):
-        env.prepend_path("PATH", self.prefix.bin)
         # Bash completions.
         bindir = self.prefix.bin
         env.from_sourcing_file(os.path.join(bindir, "fhicl-dump_completions"))

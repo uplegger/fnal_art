@@ -6,12 +6,8 @@
 import os
 import sys
 
-from pathlib import Path
-
-sys.path.append(str(Path(__file__).parents[2] / "lib"))
-from utilities import *
-
 from spack.package import *
+from spack.pkg.fnal_art.utilities import *
 
 
 class Cetlib(CMakePackage):
@@ -76,26 +72,23 @@ class Cetlib(CMakePackage):
 
     def setup_build_environment(self, env):
         prefix = self.build_directory
-        # Binaries.
-        env.prepend_path("PATH", os.path.join(prefix, "bin"))
+        # Binaries required for some of the tests.
+        env.prepend_path("PATH", prefix.bin)
         # For plugin tests (not needed for installed package).
-        env.prepend_path("CET_PLUGIN_PATH", os.path.join(prefix, "lib"))
+        env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Perl modules.
-        env.prepend_path("PERL5LIB", os.path.join(prefix, "perllib"))
+        env.prepend_path("PERL5LIB", prefix.perllib)
         # Cleanup.
         sanitize_environments(env, "PATH", "CET_PLUGIN_PATH", "PERL5LIB")
 
     def setup_run_environment(self, env):
-        env.prepend_path("PATH", self.prefix.bin)
-        prefix = self.prefix
         # Perl modules.
-        env.prepend_path("PERL5LIB", os.path.join(prefix, "perllib"))
+        env.prepend_path("PERL5LIB", self.prefix.perllib)
         # Cleanup.
-        sanitize_environments(env, "PERL5LIB")
+        sanitize_environments(env, "PATH", "PERL5LIB")
 
     def setup_dependent_build_environment(self, env, dependent_spec):
-        prefix = self.prefix
         # Perl modules.
-        env.prepend_path("PERL5LIB", os.path.join(prefix, "perllib"))
+        env.prepend_path("PERL5LIB", self.prefix.perllib)
         # Cleanup.
         sanitize_environments(env, "PERL5LIB")
