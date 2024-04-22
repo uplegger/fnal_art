@@ -33,7 +33,6 @@ class Larcore(CMakePackage):
     url = "https://github.com/LArSoft/larcore/archive/v01_02_03.tar.gz"
     list_url = "https://api.github.com/repos/LArSoft/larcore/tags"
 
-    version("10.00.00rc1", sha256="a47964d1fcdd3067da42a93e8198d5cceb1196adb7974898ebc231b34b1bd5bc")
     version("09.11.01", sha256="2cc3cc0e90f5f4c49d3d3f8cf29d26b21686b34d88d31a9f553df5cff5d4e118")
 
     version("09.10.01", sha256="748ce3a30f81f2dc789be8d276fb0831c951eeef514ff4cae6e2d6ff291fb9fb")
@@ -41,20 +40,12 @@ class Larcore(CMakePackage):
     version("09.03.02", sha256="16f60e05edd620b6a41928f591fe062db2e9d91cf7948fa4f30d688bd547bcbb")
     version("09.03.01", sha256="bab2aa40e0d796c4f11433ea1096e0b44b1b4d1b09b1c531495ad2b19caf879f")
     version("09.03.00", sha256="d9f54979c57c94cee142e6b477a5df44a65baf4a132d48cc455f49540bf3d72b")
-    version(
-        "09.02.04.01", sha256="efd3ae5d4ea699a383ab481d1efa496f19fbb57e1edf422ad773aa6eb1766876"
-    )
+    version("09.02.04.01", sha256="efd3ae5d4ea699a383ab481d1efa496f19fbb57e1edf422ad773aa6eb1766876")
     version("09.02.04", sha256="b3408c26313679a872b2a875d92510b1a4a4a108ce5795b81185edf1d6c4a813")
     version("09.02.03", sha256="27fa2435c66e1e4b5dfcf0d4a0c1c3aa34623a2a50f36bd47fcf8102b17c6198")
-    version(
-        "09.02.02.04", sha256="c6ea5c49f757252d8739f081638997a7815081860bcd97f7691cd852a00f0082"
-    )
-    version(
-        "09.02.02.03", sha256="30ecf738c12380a9629024b84af3cd9110749f0ddd37ae3cd0834c31b42f0e18"
-    )
-    version(
-        "09.02.02.02", sha256="5fa4a0040139f7e06a1219919a876dd4cc56970b01c6d8e8cd32b1119b899f93"
-    )
+    version("09.02.02.04", sha256="c6ea5c49f757252d8739f081638997a7815081860bcd97f7691cd852a00f0082")
+    version("09.02.02.03", sha256="30ecf738c12380a9629024b84af3cd9110749f0ddd37ae3cd0834c31b42f0e18")
+    version("09.02.02.02", sha256="5fa4a0040139f7e06a1219919a876dd4cc56970b01c6d8e8cd32b1119b899f93")
     version("mwm1", tag="mwm1", git="https://github.com/marcmengel/larcore.git")
     version("develop", branch="develop", get_full_repo=True)
 
@@ -93,7 +84,7 @@ class Larcore(CMakePackage):
     depends_on("larcorealg")
     depends_on("art-root-io")
     depends_on("cetmodules", type="build")
-    depends_on("cetbuildtools", type="build" , when="@:09.11")
+    depends_on("cetbuildtools", type="build" , when="@:09.05.00")
 
     def cmake_args(self):
         args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
