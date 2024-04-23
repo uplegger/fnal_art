@@ -67,7 +67,7 @@ class FhiclCpp(CMakePackage):
 
     def setup_build_environment(self, env):
         # Path for tests.
-        env.prepend_path("PATH", self.build_directory.bin)
+        env.prepend_path("PATH", os.path.join(self.build_directory, "bin"))
         # Cleanup
         sanitize_environments(env, "PATH")
 

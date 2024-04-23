@@ -67,6 +67,6 @@ class Canvas(CMakePackage):
 
     def setup_build_environment(self, env):
         # Binaries.
-        env.prepend_path("PATH", self.build_directory.bin)
+        env.prepend_path("PATH", os.path.join(self.build_directory, "bin"))
         # Cleanup.
         sanitize_environments(env, "PATH")
